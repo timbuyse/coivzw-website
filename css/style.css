@@ -263,16 +263,25 @@ a {
   overflow: hidden;
 }
 
+/* LET OP: dit element draagt óók de klasse container. Zet je hier een kleinere
+   max-width, dan overschrijft die de 1140px van de container, en omdat de
+   container margin: 0 auto heeft schuift het blok meteen naar het midden. Zo
+   stond de herotekst 190px verder naar rechts dan de rest van de pagina.
+   De lijnlengte hoort dus op h1 en p, niet op dit blok. */
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  /* .hero is een flexbox, dus dit blok is een flex-item. Zonder width: 100%
+     krimpt het tot zijn inhoud en centreren de auto-marges van .container het
+     midden in het scherm - precies wat we hier niet willen. */
+  width: 100%;
 }
 
 .hero h1 {
   color: #fff;
   font-size: clamp(2.1rem, 4.6vw, 3.4rem);
   margin-bottom: 22px;
+  max-width: 17ch;
 }
 
 .hero p {
@@ -740,10 +749,19 @@ a {
   background: linear-gradient(135deg, rgba(26, 21, 18, 0.94), rgba(180, 69, 31, 0.62));
 }
 
+/* Zelfde valkuil als bij .hero__content: dit is ook een container, dus geen
+   max-width hier. De lijnlengte staat op de h1 en de p eronder. */
 .page-hero__content {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+}
+
+.page-hero h1 {
+  max-width: 20ch;
+}
+
+.page-hero p {
+  max-width: 58ch;
 }
 
 .page-hero h1 {
