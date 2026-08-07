@@ -2,6 +2,37 @@
 
 Statische website voor "Centrum voor Ondersteuning van Digitale Innovatie" (COI vzw).
 
+## Structuur
+
+Elke pagina is een eigen `index.html` in een eigen map, zodat ze een eigen URL heeft.
+Header en footer staan letterlijk in elk bestand: er is geen build-stap en geen
+template-engine. Pas je iets aan in de navigatie of de footer, dan moet dat in
+alle pagina's gebeuren.
+
+| URL | Bestand |
+| --- | --- |
+| `/` | `index.html` |
+| `/over-ons/` | `over-ons/index.html` |
+| `/wat-we-ondersteunen/` | `wat-we-ondersteunen/index.html` |
+| `/projecten/` | `projecten/index.html` |
+| `/historiek/` | `historiek/index.html` |
+| `/bestuursorgaan/` | `bestuursorgaan/index.html` |
+| `/documenten/` | `documenten/index.html` |
+| `/contact/` | `contact/index.html` |
+| `/privacy/` | `privacy/index.html` |
+| `/cookies/` | `cookies/index.html` |
+
+Verder: `css/style.css`, `js/script.js` (draait op elke pagina, elk blok checkt
+zelf of zijn element bestaat), `sitemap.xml` en `robots.txt`.
+
+Paden binnen subpagina's zijn relatief (`../assets/...`), niet absoluut, zodat de
+site ook werkt als hij niet op de root van een domein staat.
+
+Nieuwe pagina toevoegen: kopieer een bestaande map, pas `<title>`,
+`<meta name="description">`, `<link rel="canonical">` en de inhoud aan, zet
+`class="is-active"` op de juiste navigatielink, en voeg de URL toe aan
+`sitemap.xml`.
+
 ## Lokaal bekijken
 
 Open `index.html` direct in een browser, of start een lokale server:

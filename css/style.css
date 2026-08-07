@@ -1,6 +1,12 @@
 :root {
   --color-primary: #4865f7;
+  /* Iets donkerder dan --color-primary, enkel voor linktekst: het merkblauw haalt
+     op wit net 4,69:1 en dat is te krap voor lopende tekst. */
+  --color-link: #3448cd;
   --color-text: #4d4d5d;
+  /* Voor bijschriften en meta-regels. Vervangt #9a9aa8 en #8b8d9a, die op wit
+     onder de leesbaarheidsdrempel van 4,5:1 bleven. */
+  --color-muted: #666877;
   --color-dark: #1f2233;
   --color-bg-alt: #f1f3f9;
   --font-heading: "Prata", serif;
@@ -16,12 +22,19 @@
 
 html {
   scroll-behavior: smooth;
+  /* De site heeft maar een ontwerp: een licht. Zonder deze regel darkent de browser
+     in donkere modus zelf het canvas, terwijl onze tekstkleuren donker blijven -
+     dan staat bijna-zwarte tekst op een zwarte achtergrond. */
+  color-scheme: only light;
+  background-color: #fff;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--color-text);
   line-height: 1.6;
+  /* Expliciet, niet transparant: anders schijnt het canvas van de browser door. */
+  background-color: #fff;
 }
 
 .container {
@@ -37,7 +50,7 @@ h1, h2, h3 {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -56,6 +69,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* Houdt de naam los van het menu; zonder deze gap raken ze elkaar bijna
+     op de breedtes waar het menu nog horizontaal staat. */
+  gap: 48px;
   height: 80px;
 }
 
@@ -64,6 +80,7 @@ a {
   align-items: center;
   gap: 14px;
   color: var(--color-dark);
+  flex-shrink: 0;
 }
 
 .header__logo-mark {
@@ -80,7 +97,7 @@ a {
 
 .nav__list {
   display: flex;
-  gap: 32px;
+  gap: 26px;
   list-style: none;
 }
 
@@ -230,6 +247,9 @@ a {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Elk logo staat in hetzelfde lichtgrijze kader - een lichte drager, want zo
+   goed als elk merk levert zijn logo in een donkere versie aan. Het grijs zet
+   het kader vanzelf af tegen de witte kaart eronder, dus geen randlijn nodig. */
 .project-card__logo {
   height: 140px;
   display: flex;
@@ -245,15 +265,20 @@ a {
   object-fit: contain;
 }
 
-.project-card__logo--dark {
-  background: var(--color-dark);
+/* Voor brede woordmerken (bv. Syndicate One, 208x26): die zijn van nature laag
+   en zouden anders als een streepje in het midden van het kader hangen. Laat ze
+   de volle breedte nemen in plaats van hun eigen pixelbreedte. */
+.project-card__logo--wide img {
+  width: 100%;
+  height: auto;
 }
 
-.project-card__logo--text {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  color: var(--color-primary);
-  background: var(--color-dark);
+/* Drie merken leverden hun logo enkel als zuiver wit silhouet op transparant
+   (gemeten: maximale verzadiging <= 0,03, dus echt monochroom). Omkeren geeft
+   exact dezelfde vorm in zwart en houdt ze leesbaar op het witte kader. Gebruik
+   dit uitsluitend voor monochrome logo's - bij kleur verschuift de tint. */
+.project-card__logo--invert img {
+  filter: invert(1);
 }
 
 .project-card__body {
@@ -272,7 +297,7 @@ a {
 .project-card__year {
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: var(--color-primary);
+  color: var(--color-link);
   font-weight: 600;
   background: var(--color-bg-alt);
   padding: 2px 10px;
@@ -402,7 +427,7 @@ a {
 
 .contact__form-note {
   font-size: 0.8rem;
-  color: #9a9aa8;
+  color: var(--color-muted);
   margin-top: 10px;
 }
 
@@ -410,14 +435,31 @@ a {
 .footer {
   background: var(--color-dark);
   color: #fff;
-  padding: 30px 0;
+  padding: 40px 0;
   text-align: center;
   font-size: 0.85rem;
 }
 
 .footer__legal {
   margin-top: 8px;
-  color: #aaa;
+  color: #b7b9c4;
+  line-height: 1.7;
+}
+
+.footer__links {
+  margin-top: 12px;
+}
+
+/* Alle links in de voettekst wit: het merkblauw haalt op de donkere
+   achtergrond maar 2,2:1 en is daar praktisch onleesbaar. */
+.footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer__copy {
+  margin-top: 12px;
+  color: #8b8d9a;
 }
 
 .footer__logo {
@@ -426,8 +468,277 @@ a {
   margin-bottom: 16px;
 }
 
+/* Page hero (binnenpagina's) - compacter dan de hero op de homepage,
+   met extra ruimte bovenaan omdat de header fixed staat. */
+.page-hero {
+  position: relative;
+  padding: 150px 0 70px;
+  background: var(--color-dark);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(31, 34, 51, 0.9), rgba(72, 101, 247, 0.65));
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.page-hero h1 {
+  color: #fff;
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+
+.page-hero p {
+  font-size: 1.05rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  padding: 18px 0 0;
+}
+
+.breadcrumb a {
+  color: var(--color-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+/* Actieve navigatie-link */
+.nav__list a.is-active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Kaartjes met doorverwijzingen (homepage) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.94rem;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.card__link {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Feitenstrook */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 28px;
+  text-align: center;
+}
+
+.fact__value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.fact__label {
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+/* Identiteitskader (rechtsvorm, ondernemingsnummer, zetel) */
+.identity {
+  max-width: 760px;
+  margin: 40px auto 0;
+  background: #fff;
+  border: 1px solid #e2e5ee;
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
+  padding: 24px 28px;
+}
+
+.identity h3 {
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+.identity dl {
+  display: grid;
+  grid-template-columns: minmax(160px, auto) 1fr;
+  gap: 8px 20px;
+  font-size: 0.92rem;
+}
+
+.identity dt {
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.identity dd {
+  margin: 0;
+}
+
+/* Lopende tekst (over ons, criteria, juridische pagina's) */
+.prose {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  margin: 40px 0 14px;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose h3 {
+  font-size: 1.15rem;
+  margin: 28px 0 10px;
+}
+
+.prose p {
+  margin-bottom: 16px;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 16px 22px;
+}
+
+.prose li {
+  margin-bottom: 8px;
+}
+
+/* Brede tabellen scrollen binnen hun eigen kader; de pagina zelf mag
+   nooit horizontaal scrollen op een smal scherm. */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.prose table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  margin-bottom: 0;
+  font-size: 0.92rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #e2e5ee;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--color-bg-alt);
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.prose__updated {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 30px;
+}
+
+/* Documentenlijst */
+.doc-list {
+  max-width: 760px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.doc-list li {
+  border-bottom: 1px solid #e2e5ee;
+  padding: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+}
+
+.doc-list li:first-child {
+  border-top: 1px solid #e2e5ee;
+}
+
+.doc-list__title {
+  font-weight: 600;
+  color: var(--color-dark);
+  flex-grow: 1;
+}
+
+.doc-list__meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* Projectkaart: maatschappelijke opbrengst eerst, rol als voetregel */
+.project-card__role {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e9ebf2;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
 /* Responsive */
 @media (max-width: 860px) {
+  .page-hero {
+    padding: 120px 0 50px;
+  }
+
+  .page-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .identity dl {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .identity dd {
+    margin-bottom: 10px;
+  }
+
   .nav {
     position: fixed;
     top: 80px;
@@ -441,7 +752,8 @@ a {
   }
 
   .nav.is-open {
-    max-height: 320px;
+    /* Ruim genoeg voor de zes menu-items (gemeten: 339px bij 375px breed). */
+    max-height: 420px;
   }
 
   .nav__list {
