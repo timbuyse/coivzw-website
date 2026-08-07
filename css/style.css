@@ -87,10 +87,28 @@
      knoppen, kaarten, navigatie en de scroll-animaties op dezelfde manier. */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --snel: 0.2s;
-  --traag: 0.7s;
+  /* Korter dan de 0,7s van voorheen. De referentiesite voelt levendig door
+     korte overgangen, niet door lang binnenkomende elementen. */
+  --traag: 0.45s;
 
   /* Verticale ademruimte per sectie, meeschalend met de vensterbreedte. */
   --sectie-ruimte: clamp(72px, 9vw, 128px);
+
+  /* Typografische schaal: zeven stappen, en niets daarbuiten.
+     Er stonden hier 23 verschillende groottes, waarvan er dertien tussen 12,8
+     en 19,2px zaten - het verschil tussen twee ervan was 0,32px. Zulke sprongen
+     leest niemand als hiërarchie; ze ogen alleen als onnauwkeurigheid.
+     De grote stappen schalen mee met de vensterbreedte, en wel zo dat de
+     onderlinge verhouding op elke breedte behouden blijft. Op 375px vielen
+     paginatitel en sectietitel voordien allebei op 27,2px - dus precies weg
+     op het scherm waar hiërarchie het hardst nodig is. */
+  --t-1: 0.8125rem;                          /* 13px - bijschrift, meta */
+  --t-2: 0.9375rem;                          /* 15px - kleine tekst in kaarten */
+  --t-3: 1rem;                               /* 16px - broodtekst */
+  --t-4: 1.1875rem;                          /* 19px - kaarttitel, inleiding */
+  --t-5: clamp(1.375rem, 2.1vw, 1.75rem);    /* 22-28px - sectietitel */
+  --t-6: clamp(1.625rem, 3vw, 2.25rem);      /* 26-36px - paginatitel */
+  --t-7: clamp(2rem, 4.6vw, 3.375rem);       /* 32-54px - hero */
 }
 
 * {
@@ -199,7 +217,7 @@ a {
 /* Het merkteken leest zelf al C-O-I, dus de afkorting hoeft er niet naast.
    Wat er wel bij moet, is waar die drie letters voor staan. */
 .header__logo-sub {
-  font-size: 0.68rem;
+  font-size: var(--t-1);
   font-weight: 600;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -217,7 +235,7 @@ a {
 .nav__list a {
   color: var(--color-dark);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: var(--t-2);
   transition: color var(--snel) var(--ease);
 }
 
@@ -279,13 +297,13 @@ a {
 
 .hero h1 {
   color: #fff;
-  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+  font-size: var(--t-7);
   margin-bottom: 22px;
-  max-width: 17ch;
+  max-width: 21ch;
 }
 
 .hero p {
-  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  font-size: var(--t-4);
   margin-bottom: 32px;
   max-width: 60ch;
   color: rgba(255, 255, 255, 0.86);
@@ -315,7 +333,7 @@ a {
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: var(--t-3);
   transition: background var(--snel) var(--ease),
               transform var(--snel) var(--ease),
               box-shadow var(--snel) var(--ease);
@@ -345,7 +363,7 @@ a {
    los boven zweven. Gecentreerde lopende tekst leest bovendien trager, omdat
    het oog elke regel op een andere plek moet terugvinden. */
 .section__title {
-  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-size: var(--t-5);
   margin-bottom: 40px;
   max-width: 24ch;
 }
@@ -376,9 +394,14 @@ a {
 }
 
 /* Projects */
+/* Twee kolommen, geen drie. Met drie kolommen bleef 54% van het raster leeg:
+   vijf van de acht jaargroepen hebben maar één project, dus geen enkele rij
+   vulde zich. Een raster ontleent zijn kracht aan volle rijen; zodra de inhoud
+   de kolomindeling structureel niet haalt, werkt het tegen de inhoud in.
+   min(100%, ...) houdt het bruikbaar op een smal scherm. */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
   gap: 28px;
 }
 
@@ -395,11 +418,11 @@ a {
               border-color var(--snel) var(--ease);
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-line-diep);
-  box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
-}
+/* Bewust GEEN hover-effect: er zit geen link in deze kaart, dus een lift zou
+   klikbaarheid beloven die er niet is. Hover hoort te betekenen "hier kan je
+   klikken"; anders is het versiering die de bezoeker op het verkeerde been zet.
+   Zodra er per project een verwijzing naar de partnersite bij komt, mag de
+   hover van .card hier gewoon overgenomen worden. */
 
 /* Elk logo staat in hetzelfde lichtgrijze kader - een lichte drager, want zo
    goed als elk merk levert zijn logo in een donkere versie aan. Het grijs zet
@@ -440,7 +463,7 @@ a {
 }
 
 .project-card__body h3 {
-  font-size: 1.1rem;
+  font-size: var(--t-4);
   margin-bottom: 10px;
 }
 
@@ -451,7 +474,7 @@ a {
   grid-column: 1 / -1;
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-size: var(--t-5);
   color: var(--color-primary);
   display: flex;
   align-items: center;
@@ -472,14 +495,18 @@ a {
 }
 
 .project-card__body p {
-  font-size: 0.92rem;
+  font-size: var(--t-2);
   color: var(--color-text);
 }
 
 /* Oproep. Sluit de startpagina af met de vraag die nergens anders prominent
    stond: heeft u een initiatief? Donker vlak, zodat het losstaat van de rest. */
+/* Op het zandvlak in plaats van donker. Donker liep naadloos over in de
+   voettekst - samen 617px aaneengesloten bijna-zwart - en dan leest de bezoeker
+   de enige plek waar de site iets vraagt als voettekst, dus als chroom. */
 .oproep {
-  background: var(--color-dark);
+  background: var(--color-bg-alt);
+  border-top: 3px solid var(--color-primary);
 }
 
 .oproep__inner {
@@ -495,13 +522,12 @@ a {
 }
 
 .oproep h2 {
-  color: #fff;
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-size: var(--t-5);
   margin-bottom: 10px;
 }
 
 .oproep p {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--color-muted);
 }
 
 .oproep .btn {
@@ -509,46 +535,34 @@ a {
 }
 
 /* Timeline */
-.timeline {
-  max-width: 760px;
-  margin: 0;
-  position: relative;
-  padding-left: 32px;
-  border-left: 2px solid var(--color-line);
+/* Tijdvakken op de historiekpagina. Gebruikt dezelfde .jaar-kop als de
+   projectenpagina; er waren voordien twee verschillende vormen voor hetzelfde
+   idee (verticale lijn met bol tegenover doorlopende lijn), en dan is het
+   geen patroon meer. */
+.tijdvakken {
+  display: grid;
+  gap: 4px;
 }
 
-.timeline__item {
-  position: relative;
-  margin-bottom: 40px;
+.tijdvak {
+  max-width: 68ch;
+  padding-bottom: 8px;
 }
 
-.timeline__item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline__item::before {
-  content: "";
-  position: absolute;
-  left: -41px;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  border: 3px solid var(--color-bg);
-}
-
-.timeline__year {
-  font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.2rem;
+.tijdvak h3 {
+  font-size: var(--t-4);
   margin-bottom: 8px;
 }
 
 /* Board */
+/* Kleiner weergegeven dan voorheen. De bronbestanden zijn 240x240; op 196 CSS-px
+   vraagt een scherm met dubbele pixeldichtheid er 392 van, en dat is zichtbaar
+   zacht. Door het raster op 900px te begrenzen blijven het twee rijen van vijf,
+   maar zakt de weergave naar ongeveer 157px - veel dichter bij de bron. */
 .board-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 28px;
 }
 
@@ -566,12 +580,12 @@ a {
 }
 
 .board-member h3 {
-  font-size: 1rem;
+  font-size: var(--t-3);
   margin-bottom: 4px;
 }
 
 .board-member p {
-  font-size: 0.85rem;
+  font-size: var(--t-1);
   color: var(--color-primary);
   font-weight: 600;
 }
@@ -605,7 +619,7 @@ a {
 }
 
 .contact__info h3 {
-  font-size: 1.1rem;
+  font-size: var(--t-4);
   margin-bottom: 6px;
   margin-top: 20px;
 }
@@ -622,7 +636,7 @@ a {
 
 .contact__form label {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--t-2);
   margin-top: 10px;
 }
 
@@ -632,7 +646,7 @@ a {
   border: 1px solid var(--color-line);
   border-radius: 4px;
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: var(--t-2);
 }
 
 .contact__form input:focus,
@@ -646,28 +660,36 @@ a {
 }
 
 .contact__form-note {
-  font-size: 0.8rem;
+  font-size: var(--t-1);
   color: var(--color-muted);
   margin-top: 10px;
 }
 
-/* Footer */
+/* Footer. Stond als enige blok van de hele site gecentreerd, terwijl links
+   uitlijnen elders het uitgangspunt is. Nu drie kolommen die op een smal
+   scherm onder elkaar vallen; dat scheelt meteen hoogte. */
 .footer {
   background: var(--color-dark);
   color: #fff;
-  padding: 40px 0;
-  text-align: center;
-  font-size: 0.85rem;
+  padding: 44px 0;
+  font-size: var(--t-1);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 20px 48px;
 }
 
 .footer__legal {
-  margin-top: 8px;
   color: var(--color-op-donker);
   line-height: 1.7;
 }
 
 .footer__links {
-  margin-top: 12px;
+  justify-self: end;
+  text-align: right;
 }
 
 /* Alle links in de voettekst wit: het merkblauw haalt op de donkere
@@ -677,15 +699,19 @@ a {
   text-decoration: underline;
 }
 
+/* Het auteursrecht loopt over de volle breedte onder de andere drie, met een
+   dunne scheiding erboven. */
 .footer__copy {
-  margin-top: 12px;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-op-donker-zacht);
 }
 
 .footer__logo {
-  height: 36px;
+  height: 34px;
   width: auto;
-  margin-bottom: 16px;
 }
 
 /* Scroll-animatie.
@@ -746,7 +772,12 @@ a {
 .page-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(26, 21, 18, 0.94), rgba(180, 69, 31, 0.62));
+  /* Zelfde recept en dezelfde dosering als de hero op de startpagina. Voordien
+     stond hier bijna dubbel zoveel terracotta (0,62 tegenover 0,34), waardoor
+     de hero die het minst hoeft te dragen het hardst schreeuwde. */
+  background:
+    radial-gradient(115% 95% at 16% 10%, rgba(180, 69, 31, 0.34) 0%, rgba(180, 69, 31, 0) 60%),
+    linear-gradient(152deg, #2a2320 0%, #1a1512 60%, #140f0d 100%);
 }
 
 /* Zelfde valkuil als bij .hero__content: dit is ook een container, dus geen
@@ -766,17 +797,17 @@ a {
 
 .page-hero h1 {
   color: #fff;
-  font-size: 2.2rem;
+  font-size: var(--t-6);
   margin-bottom: 14px;
 }
 
 .page-hero p {
-  font-size: 1.05rem;
+  font-size: var(--t-4);
 }
 
 /* Breadcrumb */
 .breadcrumb {
-  font-size: 0.85rem;
+  font-size: var(--t-1);
   color: var(--color-muted);
   padding: 18px 0 0;
 }
@@ -803,6 +834,7 @@ a {
 }
 
 .card {
+  position: relative;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: 10px;
@@ -821,31 +853,51 @@ a {
   box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
 }
 
-/* De doorverwijzing schuift mee bij hover over de hele kaart. Inline-block is
-   nodig: op een gewoon inline-element heeft transform geen effect. */
+/* De hele kaart is klikbaar, niet alleen dat ene zinnetje onderaan. Het
+   onzichtbare vlak van deze ::after legt zich over de kaart, zodat de hover van
+   .card ook echt een klik oplevert. Zo blijft de belofte van die hover waar,
+   en hoeft er niets aan de HTML te veranderen. */
 .card__link {
   display: inline-block;
   transition: transform var(--snel) var(--ease);
+}
+
+.card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
 }
 
 .card:hover .card__link {
   transform: translateX(4px);
 }
 
+/* Toetsenbordgebruikers zien de kaart oplichten in plaats van alleen de link. */
+.card:focus-within {
+  border-color: var(--color-line-diep);
+  box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
+}
+
+.card__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 .card h3 {
-  font-size: 1.2rem;
+  font-size: var(--t-4);
   margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 0.94rem;
+  font-size: var(--t-2);
   margin-bottom: 18px;
   flex-grow: 1;
 }
 
 .card__link {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--t-2);
 }
 
 /* Identiteitskader (rechtsvorm, ondernemingsnummer, zetel) */
@@ -860,7 +912,7 @@ a {
 }
 
 .identity h3 {
-  font-size: 1.05rem;
+  font-size: var(--t-4);
   margin-bottom: 12px;
 }
 
@@ -868,7 +920,7 @@ a {
   display: grid;
   grid-template-columns: minmax(160px, auto) 1fr;
   gap: 8px 20px;
-  font-size: 0.92rem;
+  font-size: var(--t-2);
 }
 
 .identity dt {
@@ -887,7 +939,7 @@ a {
 }
 
 .prose h2 {
-  font-size: 1.5rem;
+  font-size: var(--t-5);
   margin: 40px 0 14px;
 }
 
@@ -896,7 +948,7 @@ a {
 }
 
 .prose h3 {
-  font-size: 1.15rem;
+  font-size: var(--t-4);
   margin: 28px 0 10px;
 }
 
@@ -925,7 +977,7 @@ a {
   min-width: 520px;
   border-collapse: collapse;
   margin-bottom: 0;
-  font-size: 0.92rem;
+  font-size: var(--t-2);
 }
 
 .prose th,
@@ -943,7 +995,7 @@ a {
 }
 
 .prose__updated {
-  font-size: 0.85rem;
+  font-size: var(--t-1);
   color: var(--color-muted);
   margin-bottom: 30px;
 }
@@ -969,19 +1021,19 @@ a {
 .voorwaarde__nr {
   display: block;
   font-family: var(--font-heading);
-  font-size: 1.7rem;
+  font-size: var(--t-6);
   line-height: 1;
   color: var(--color-primary);
   margin-bottom: 12px;
 }
 
 .voorwaarde h3 {
-  font-size: 1.02rem;
+  font-size: var(--t-4);
   margin-bottom: 8px;
 }
 
 .voorwaarde p {
-  font-size: 0.9rem;
+  font-size: var(--t-2);
   color: var(--color-text);
 }
 
@@ -1001,12 +1053,12 @@ a {
 }
 
 .steunvorm h3 {
-  font-size: 1.02rem;
+  font-size: var(--t-4);
   margin-bottom: 10px;
 }
 
 .steunvorm p {
-  font-size: 0.9rem;
+  font-size: var(--t-2);
 }
 
 .steunvorm__wanneer {
@@ -1021,6 +1073,30 @@ a {
   color: var(--color-dark);
 }
 
+/* De vier werkdomeinen op de over-onspagina. Stonden als opsomming onder
+   elkaar in één tekstkolom, waardoor de rechterhelft van de pagina over de
+   volle hoogte leeg bleef. */
+.domeinen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+}
+
+.domein {
+  padding-top: 18px;
+  border-top: 2px solid var(--color-primary);
+}
+
+.domein h3 {
+  font-size: var(--t-4);
+  margin-bottom: 8px;
+}
+
+.domein p {
+  font-size: var(--t-2);
+  color: var(--color-text);
+}
+
 /* Documentenlijst */
 .doc-list {
   max-width: 760px;
@@ -1030,25 +1106,47 @@ a {
 
 .doc-list li {
   border-bottom: 1px solid var(--color-line);
-  padding: 18px 0;
+  /* Negatieve marge zodat de hoverbalk iets breder is dan de tekst en de
+     tekst zelf toch op de linkerrand van de pagina blijft staan. */
+  padding: 18px 14px;
+  margin: 0 -14px;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 6px 16px;
+  transition: background var(--snel) var(--ease);
 }
 
 .doc-list li:first-child {
   border-top: 1px solid var(--color-line);
 }
 
+/* Dit zijn links, en ze moeten er ook zo uitzien. Ze stonden in dezelfde kleur
+   als een gewone kop, zonder onderstreping en zonder hover - op de ene pagina
+   waar alle inhoud uit verwijzingen bestaat. */
 .doc-list__title {
   font-weight: 600;
-  color: var(--color-dark);
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-line-diep);
   flex-grow: 1;
+  transition: color var(--snel) var(--ease),
+              text-decoration-color var(--snel) var(--ease);
+}
+
+.doc-list__title:hover {
+  color: var(--color-primary);
+  text-decoration-color: currentColor;
+}
+
+.doc-list li:hover {
+  background: var(--color-bg-alt);
 }
 
 .doc-list__meta {
-  font-size: 0.85rem;
+  font-size: var(--t-1);
   color: var(--color-muted);
 }
 
@@ -1057,7 +1155,7 @@ a {
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid var(--color-line);
-  font-size: 0.82rem;
+  font-size: var(--t-1);
   color: var(--color-muted);
 }
 
@@ -1065,10 +1163,6 @@ a {
 @media (max-width: 860px) {
   .page-hero {
     padding: 120px 0 50px;
-  }
-
-  .page-hero h1 {
-    font-size: 1.7rem;
   }
 
   .identity dl {
@@ -1122,11 +1216,18 @@ a {
     display: none;
   }
 
-  .hero h1 {
-    font-size: 1.9rem;
-  }
-
   .contact {
     grid-template-columns: 1fr;
+  }
+
+  /* Voettekst onder elkaar in plaats van in drie kolommen. */
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer__links {
+    justify-self: start;
+    text-align: left;
   }
 }

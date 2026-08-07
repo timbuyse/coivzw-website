@@ -46,7 +46,8 @@ if (yearEl) {
     '.projects-grid > .jaar-kop',
     '.projects-grid > .project-card',
     '.board-grid > .board-member',
-    '.timeline__item',
+    '.tijdvakken > .jaar-kop', '.tijdvakken > .tijdvak',
+    '.domeinen > .domein',
     '.doc-list > li',
     '.contact__info', '.contact__form'
   ].join(',');
@@ -57,18 +58,31 @@ if (yearEl) {
   document.documentElement.classList.add('js-reveal');
 
   // Elementen die naast elkaar staan komen kort na elkaar binnen in plaats van
-  // allemaal tegelijk. De teller loopt per ouder, zodat elke rij opnieuw begint.
-  var perOuder = {};
+  // allemaal tegelijk.
+  //
+  // De teller loopt per DOM-ouder, bijgehouden in een Map met het element zelf
+  // als sleutel. Eerder stond hier de klassenaam als sleutel, en dat ging mis:
+  // elk blok met de klasse "container" deelde dan één teller over de hele
+  // pagina, waardoor een kop honderden pixels lager een vertraging erfde van
+  // een element waar hij niets mee te maken had.
+  //
+  // De vertraging wordt afgetopt in plaats van weggelaten. Voordien kregen
+  // elementen vanaf de achtste rang géén vertraging meer, waardoor de reeks
+  // terugsprong naar nul: bestuurder 8 kwam op 0,49s binnen en bestuurder 9
+  // weer meteen. Nu blijft alles vanaf rang 5 op dezelfde waarde staan.
+  var perOuder = new Map();
+  var MAX_RANG = 5;
+
   doelen.forEach(function (el) {
     el.classList.add('reveal');
 
     var ouder = el.parentNode;
-    var sleutel = ouder.className || 'los';
-    perOuder[sleutel] = (perOuder[sleutel] || 0) + 1;
+    var rang = perOuder.get(ouder) || 0;
+    perOuder.set(ouder, rang + 1);
 
-    var rang = perOuder[sleutel] - 1;
-    if (rang > 0 && rang < 8) {
-      el.style.setProperty('--reveal-vertraging', (rang * 0.07).toFixed(2) + 's');
+    if (rang > 0) {
+      var trap = Math.min(rang, MAX_RANG);
+      el.style.setProperty('--reveal-vertraging', (trap * 0.06).toFixed(2) + 's');
     }
   });
 
