@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Merkboek - COI vzw</title>
+<meta name="description" content="De vormtaal van COI vzw: merkteken, kleur, typografie, opmaak, drukwerk, briefpapier, presentatie, e-mailhandtekening en fotografie." />
+<!-- Bewust niet indexeren: dit is een werkdocument voor intern gebruik en voor
+     leveranciers, geen pagina voor bezoekers. Staat daarom ook niet in de
+     navigatie en niet in sitemap.xml. -->
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+</head>
+<body>
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url("../fonts/instrument-sans-latin.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../fonts/instrument-serif-latin.woff2") format("woff2")}
+
+/* ---- Merkkleuren. Deze waarden zijn de bron, niet een benadering: ze komen
+   letterlijk uit het :root-blok van css/style.css op coivzw.be. ---- */
+:root{
+  --merk-primary:#b4451f; --merk-primary-diep:#93381a; --merk-link:#8f3616;
+  --merk-text:#5c534b; --merk-muted:#6d635a; --merk-dark:#1a1512;
+  --merk-bg:#fbf7f2; --merk-surface:#ffffff; --merk-bg-alt:#f3e9de;
+  --merk-line:#e7ded2; --merk-line-diep:#d8c9b7;
+
+  /* Documentchroom: het papier waarop dit boek zelf staat. */
+  --grond:#fbf7f2; --vlak:#ffffff; --inkt:#1a1512; --zacht:#6d635a;
+  --lijn:#e7ded2; --accent:#b4451f;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--grond);color:var(--inkt);
+  font-family:"Instrument Sans",system-ui,sans-serif;font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:clamp(40px,7vw,88px) 24px 96px}
+p,li{max-width:68ch}
+h1,h2,h3{font-weight:600;letter-spacing:-.022em;line-height:1.14;text-wrap:balance;margin:0}
+a{color:var(--accent)}
+
+/* Sectiekop: label plus doorlopende lijn. Dezelfde vorm als de jaarkoppen op
+   de projecten- en historiekpagina. */
+.kop{display:flex;align-items:center;gap:20px;margin:clamp(56px,7vw,92px) 0 26px;
+  font-size:clamp(1.375rem,2.1vw,1.75rem)}
+.kop::after{content:"";flex:1;height:1px;background:var(--lijn)}
+.kop:first-of-type{margin-top:44px}
+h3{font-size:1.1875rem;margin:34px 0 8px}
+.eyebrow{font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px}
+.titel{font-size:clamp(2rem,4.6vw,3.375rem);max-width:19ch}
+.intro{font-size:1.1875rem;color:var(--zacht);margin-top:18px}
+.klein{font-size:.9375rem;color:var(--zacht)}
+.meta{font-size:.8125rem;color:var(--zacht)}
+.cijfer{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+/* Specimen: houdt altijd zijn eigen grond vast, ook als dit document donker
+   wordt weergegeven. Een kleurstaal die meekleurt is geen kleurstaal. */
+.specimen{background:var(--merk-bg);color:var(--merk-text);border:1px solid var(--merk-line);
+  border-radius:10px;padding:clamp(22px,3vw,34px);margin:22px 0}
+.specimen h4{margin:0 0 4px;color:var(--merk-dark);font-size:1.1875rem;font-weight:600;
+  letter-spacing:-.005em}
+
+.stalen{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:14px;margin:22px 0}
+.staal{border:1px solid var(--lijn);border-radius:10px;overflow:hidden}
+.staal__vlak{height:76px}
+.staal__tekst{padding:11px 13px;background:var(--vlak)}
+.staal__naam{font-weight:600;font-size:.9375rem}
+.staal__hex{font-size:.8125rem;color:var(--zacht);font-variant-numeric:tabular-nums}
+.staal__rol{font-size:.8125rem;color:var(--zacht);margin-top:3px}
+
+table{width:100%;border-collapse:collapse;font-size:.9375rem;margin:18px 0}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--lijn);vertical-align:top}
+th{font-weight:600;font-size:.8125rem;letter-spacing:.05em;text-transform:uppercase;color:var(--zacht)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+
+.tweeluik{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px;margin:22px 0}
+.regel{border-top:2px solid var(--accent);padding-top:15px}
+.regel--nee{border-top-color:var(--lijn)}
+.regel h4{margin:0 0 6px;font-size:1rem;font-weight:600}
+.regel p{font-size:.9375rem;color:var(--zacht);margin:0}
+
+.logovak{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin:20px 0}
+.logovak > div{border:1px solid var(--merk-line);border-radius:10px;padding:26px 30px;
+  display:flex;align-items:center;justify-content:center;min-width:190px}
+.op-papier{background:var(--merk-bg)}
+.op-zand{background:var(--merk-bg-alt)}
+.op-donker{background:var(--merk-dark);border-color:var(--merk-dark)}
+
+ul{padding-left:20px}
+li{margin-bottom:7px}
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
+  font-size:.8125rem;color:var(--zacht)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Afdrukken en pdf. Zonder print-color-adjust laat de browser achtergronden
+   weg, en dan drukt een merkboek zijn eigen kleurstalen wit af. */
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4;margin:16mm 15mm}
+  body{background:#fff;font-size:10.5pt;line-height:1.55}
+  .wrap{max-width:none;padding:0}
+  p,li{max-width:none}
+  /* Niets mag over een paginagrens breken waar dat de betekenis stukmaakt. */
+  .specimen,.staal,.a4,.dia,.handtekening,.regel,pre,table{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .kop{margin-top:26px}
+  .kop:first-of-type{margin-top:0}
+  footer{margin-top:32px}
+  a{text-decoration:none}
+  /* Webadressen uitschrijven: in een afdruk kan je niet klikken. */
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:var(--zacht)}
+}
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Merkboek · versie 1</p>
+  <h1 class="titel">COI vzw</h1>
+  <p class="intro">De vormtaal zoals die op coivzw.be is vastgelegd. Dit boek beschrijft de site, niet omgekeerd: elke waarde hieronder staat letterlijk zo in <code>css/style.css</code>. Wijkt de site af, dan heeft de site gelijk en moet dit boek bij.</p>
+
+  <!-- ============ MERK ============ -->
+  <h2 class="kop">Het merk</h2>
+
+  <p>COI is een Vlaamse vereniging zonder winstoogmerk, opgericht op <span class="cijfer">29 maart 1976</span>. De vereniging steunt initiatieven die digitalisering inzetten om een maatschappelijk vraagstuk aan te pakken. Ze keert geen winst uit: wat uit een participatie terugvloeit, gaat opnieuw naar een volgend initiatief.</p>
+
+  <div class="specimen">
+    <h4>Kernzin</h4>
+    <p style="margin:6px 0 0">Wij steunen digitale innovatie die een maatschappelijk vraagstuk aanpakt.</p>
+  </div>
+
+  <h3>Hoe we onszelf noemen</h3>
+  <div class="scroll">
+    <table>
+      <tr><th>Waar</th><th>Vorm</th></tr>
+      <tr><td>Juridische stukken, voettekst</td><td>COI&nbsp;— Centrum voor Ondersteuning van digitale Innovatie vzw</td></tr>
+      <tr><td>Lopende tekst, eerste vermelding</td><td>COI vzw</td></tr>
+      <tr><td>Daarna in dezelfde tekst</td><td>COI</td></tr>
+      <tr><td>Nooit</td><td>C.O.I. · Coi · COI VZW</td></tr>
+    </table>
+  </div>
+  <p class="klein">Ondernemingsnummer <span class="cijfer">0416.237.094</span>, RPR Leuven. Dat nummer en de zetel horen in elke voettekst; ze zijn het verschil tussen een echte organisatie en een sjabloon.</p>
+
+  <!-- ============ MERKTEKEN ============ -->
+  <h2 class="kop">Het merkteken</h2>
+
+  <p>Een letterwoord: C, O en I uit één lijndikte, met ronde uiteinden. De I staat in de accentkleur en zet daarmee de klemtoon op <em>innovatie</em>. Geen metafoor, geen beeldmerk — de drie letters zijn het merk.</p>
+
+  <div class="logovak">
+    <div class="op-papier">
+      <svg width="150" height="65" viewBox="4 15 138 60" role="img" aria-label="COI op papier">
+        <g fill="none" stroke-width="11" stroke-linecap="round">
+          <path d="M48.1 28.2 A 22 22 0 1 0 48.1 61.8" stroke="#1a1512"/>
+          <circle cx="90" cy="45" r="22" stroke="#1a1512"/>
+          <path d="M134 23 L134 67" stroke="#b4451f"/>
+        </g>
+      </svg>
+    </div>
+    <div class="op-zand">
+      <svg width="150" height="65" viewBox="4 15 138 60" role="img" aria-label="COI op zandvlak">
+        <g fill="none" stroke-width="11" stroke-linecap="round">
+          <path d="M48.1 28.2 A 22 22 0 1 0 48.1 61.8" stroke="#1a1512"/>
+          <circle cx="90" cy="45" r="22" stroke="#1a1512"/>
+          <path d="M134 23 L134 67" stroke="#b4451f"/>
+        </g>
+      </svg>
+    </div>
+    <div class="op-donker">
+      <svg width="150" height="65" viewBox="4 15 138 60" role="img" aria-label="COI op donker">
+        <g fill="none" stroke-width="11" stroke-linecap="round">
+          <path d="M48.1 28.2 A 22 22 0 1 0 48.1 61.8" stroke="#ffffff"/>
+          <circle cx="90" cy="45" r="22" stroke="#ffffff"/>
+          <path d="M134 23 L134 67" stroke="#b4451f"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <h3>Constructie</h3>
+  <p class="klein">Getekend in een raster van <span class="cijfer">138 × 60</span> eenheden. Lijndikte <span class="cijfer">11</span>, ronde uiteinden. De O is een cirkel met straal <span class="cijfer">22</span>; de C ligt op dezelfde straal met een opening naar rechts; de I is een rechte van <span class="cijfer">44</span> eenheden. Die drie maten hangen samen — verander er één en het woordbeeld valt uit elkaar.</p>
+
+  <div class="tweeluik">
+    <div class="regel">
+      <h4>Wel</h4>
+      <p>Op papier, op het zandvlak, of wit op donker. Minimaal <span class="cijfer">28&nbsp;px</span> hoog op scherm. Vrije ruimte rondom van minstens de hoogte van de O.</p>
+    </div>
+    <div class="regel regel--nee">
+      <h4>Niet</h4>
+      <p>Niet uitrekken, niet kantelen, geen schaduw of verloop, de I niet in een andere kleur dan het accent, en niet op een foto of een druk vlak zetten.</p>
+    </div>
+  </div>
+
+  <p class="klein">Het merkteken leest zelf al «COI». Zet er dus niet nog eens de afkorting naast — wel de uitgeschreven naam, als kleinkapitaal in de zachte tint.</p>
+
+  <!-- ============ KLEUR ============ -->
+  <h2 class="kop">Kleur</h2>
+
+  <p>Eén accent op warm papier. Het palet heet <strong>Klei</strong>. De terracotta is schaars: knoppen, links, jaartallen, een enkele lijn. Wordt hij overal gebruikt, dan valt hij nergens meer op.</p>
+
+  <div class="stalen">
+    <div class="staal"><div class="staal__vlak" style="background:#b4451f"></div>
+      <div class="staal__tekst"><div class="staal__naam">Terracotta</div><div class="staal__hex">#b4451f</div>
+      <div class="staal__rol">Accent: knoppen, jaartallen, lijnen</div></div></div>
+    <div class="staal"><div class="staal__vlak" style="background:#8f3616"></div>
+      <div class="staal__tekst"><div class="staal__naam">Terracotta diep</div><div class="staal__hex">#8f3616</div>
+      <div class="staal__rol">Linktekst</div></div></div>
+    <div class="staal"><div class="staal__vlak" style="background:#1a1512"></div>
+      <div class="staal__tekst"><div class="staal__naam">Inkt</div><div class="staal__hex">#1a1512</div>
+      <div class="staal__rol">Koppen, hero, voettekst</div></div></div>
+    <div class="staal"><div class="staal__vlak" style="background:#5c534b"></div>
+      <div class="staal__tekst"><div class="staal__naam">Tekst</div><div class="staal__hex">#5c534b</div>
+      <div class="staal__rol">Lopende tekst</div></div></div>
+    <div class="staal"><div class="staal__vlak" style="background:#fbf7f2;border-bottom:1px solid #e7ded2"></div>
+      <div class="staal__tekst"><div class="staal__naam">Papier</div><div class="staal__hex">#fbf7f2</div>
+      <div class="staal__rol">De grond van alles</div></div></div>
+    <div class="staal"><div class="staal__vlak" style="background:#f3e9de"></div>
+      <div class="staal__tekst"><div class="staal__naam">Zand</div><div class="staal__hex">#f3e9de</div>
+      <div class="staal__rol">Afwisselende secties, logokaders</div></div></div>
+  </div>
+
+  <h3>Regels die niet onderhandelbaar zijn</h3>
+  <ul>
+    <li>Lopende tekst haalt minstens <span class="cijfer">4,5:1</span> tegenover zijn eigen achtergrond. Daarom is de linktint donkerder dan het accent: het merkblauw van vroeger haalde die drempel niet.</li>
+    <li>Op de donkere grond wordt terracotta onleesbaar (<span class="cijfer">2,2:1</span>). Links in de voettekst zijn daarom wit.</li>
+    <li>Kaarten staan wit op papier, nooit papier op papier — anders verdwijnt de rand.</li>
+  </ul>
+
+  <!-- ============ TYPOGRAFIE ============ -->
+  <h2 class="kop">Typografie</h2>
+
+  <p>Twee letters, en een strikte taakverdeling. <strong>Instrument Sans</strong> draagt alles wat je leest. <strong>Instrument Serif</strong> is uitsluitend voor <span class="cijfer">cijfers</span>: jaartallen, nummers, bedragen. Daar geeft de serif karakter; in een kop bezorgt hij de site een uitgeverslook die er niet hoort.</p>
+
+  <div class="specimen">
+    <h4>Instrument Sans — 400 tot 700</h4>
+    <p style="font-size:1.75rem;font-weight:600;letter-spacing:-.022em;line-height:1.14;margin:12px 0 8px;color:#1a1512">Wij steunen digitale innovatie</p>
+    <p style="margin:0">Een Vlaamse vereniging zonder winstoogmerk. Wat uit een participatie terugvloeit, gaat opnieuw naar een volgend initiatief.</p>
+    <p style="font-family:'Instrument Serif',Georgia,serif;font-size:2.25rem;margin:16px 0 0;color:#b4451f">1976 · 2013 · 2026</p>
+  </div>
+
+  <h3>Zeven stappen, en niets daarbuiten</h3>
+  <p class="klein">De grote stappen schalen mee met de vensterbreedte en houden hun onderlinge verhouding, zodat de hiërarchie ook op een telefoon overeind blijft.</p>
+  <div class="scroll">
+    <table>
+      <tr><th>Stap</th><th class="num">Klein scherm</th><th class="num">Groot scherm</th><th>Waarvoor</th></tr>
+      <tr><td>t-1</td><td class="num">13 px</td><td class="num">13 px</td><td>Bijschrift, meta</td></tr>
+      <tr><td>t-2</td><td class="num">15 px</td><td class="num">15 px</td><td>Kleine tekst in kaarten</td></tr>
+      <tr><td>t-3</td><td class="num">16 px</td><td class="num">16 px</td><td>Broodtekst</td></tr>
+      <tr><td>t-4</td><td class="num">19 px</td><td class="num">19 px</td><td>Kaarttitel, inleiding</td></tr>
+      <tr><td>t-5</td><td class="num">22 px</td><td class="num">28 px</td><td>Sectietitel</td></tr>
+      <tr><td>t-6</td><td class="num">26 px</td><td class="num">36 px</td><td>Paginatitel</td></tr>
+      <tr><td>t-7</td><td class="num">32 px</td><td class="num">54 px</td><td>Hero</td></tr>
+    </table>
+  </div>
+  <p class="klein">Een grootte die hier niet in staat, bestaat niet. Er stonden ooit drieëntwintig groottes in de stylesheet, waarvan sommige <span class="cijfer">0,32&nbsp;px</span> uit elkaar. Dat leest niemand als hiërarchie; het oogt alleen onnauwkeurig.</p>
+
+  <!-- ============ OPMAAK ============ -->
+  <h2 class="kop">Opmaak</h2>
+
+  <div class="tweeluik">
+    <div class="regel"><h4>Alles lijnt links uit</h4>
+      <p>Merkteken, koppen, lopende tekst en rasters beginnen op dezelfde rand. Ook sectietitels en de voettekst. Gecentreerde tekst leest trager en zweeft boven een raster dat links begint.</p></div>
+    <div class="regel"><h4>Regellengte blijft leesbaar</h4>
+      <p>Lopende tekst maximaal <span class="cijfer">68</span> tekens breed. Die begrenzing hoort op de tekst, niet op de container — anders schuift het hele blok naar het midden.</p></div>
+    <div class="regel"><h4>Hover belooft een klik</h4>
+      <p>Alleen wat klikbaar is, reageert op hover. Een kaart die oplicht maar nergens heen gaat, zet de bezoeker op het verkeerde been.</p></div>
+    <div class="regel"><h4>Eén patroon per idee</h4>
+      <p>Chronologie is overal hetzelfde: jaartal in de serif, met een lijn die doorloopt naar rechts. Twee vormen voor hetzelfde idee is geen patroon.</p></div>
+  </div>
+
+  <!-- ============ BEWEGING ============ -->
+  <h2 class="kop">Beweging</h2>
+
+  <p>Beweging is er om richting te geven, niet om indruk te maken. Eén versnellingscurve voor alles: <code>cubic-bezier(.22, .61, .36, 1)</code>. Hover en kleine overgangen duren <span class="cijfer">0,2&nbsp;s</span>, elementen die in beeld schuiven <span class="cijfer">0,45&nbsp;s</span>.</p>
+  <ul>
+    <li>Elementen die naast elkaar staan komen kort na elkaar binnen, met <span class="cijfer">0,06&nbsp;s</span> ertussen, afgetopt na de vijfde. Die spreiding drukt nabijheid uit; over een hele pagina uitgesmeerd drukt ze niets uit en leest ze als traagheid.</li>
+    <li>Wie in zijn systeem heeft aangegeven minder beweging te willen, krijgt niets: geen animatie, geen lift bij hover, geen vloeiend scrollen.</li>
+    <li>Zonder JavaScript blijft alles gewoon zichtbaar. Een animatie mag nooit de reden zijn dat iemand de inhoud niet ziet.</li>
+  </ul>
+
+  <!-- ============ TAAL ============ -->
+  <h2 class="kop">Taal en toon</h2>
+
+  <div class="tweeluik">
+    <div class="regel"><h4>Nederlands, u-vorm</h4>
+      <p>De lezer is een bestuurder, een ambtenaar of een oprichter die financiering zoekt. Geen tutoyeren, geen Engels waar een Nederlands woord bestaat.</p></div>
+    <div class="regel"><h4>Feiten voor bijvoeglijke naamwoorden</h4>
+      <p>«Opgericht in 1976» zegt meer dan «met jarenlange ervaring». Waar een getal of een datum kan staan, staat geen bijvoeglijk naamwoord.</p></div>
+    <div class="regel"><h4>Begin bij het vraagstuk</h4>
+      <p>Elke projectbeschrijving opent met wat er misging in de samenleving, niet met wat COI kocht. De rol van COI staat er als feitelijke slotregel onder.</p></div>
+    <div class="regel"><h4>Geen winst, wel verantwoording</h4>
+      <p>Dat de vereniging geen winst uitkeert en dat middelen terugvloeien, mag expliciet staan. Het is het onderscheid met een investeringsvehikel.</p></div>
+  </div>
+
+  <style>
+    .a4{background:#fbf7f2;border:1px solid var(--lijn);border-radius:4px;
+      aspect-ratio:210/297;max-width:400px;padding:7.4% 6.7% 6.7% 8%;
+      display:flex;flex-direction:column;font-size:6.5px;line-height:1.5;color:#5c534b;
+      box-shadow:0 10px 30px rgba(26,21,18,.10)}
+    .a4__logo{margin-bottom:9%}
+    .a4__geadresseerde{margin-bottom:7%;color:#1a1512}
+    .a4__body{flex:1}
+    .a4__body strong{color:#1a1512}
+    .a4__voet{border-top:.5px solid #e7ded2;padding-top:5px;font-size:5px;color:#6d635a;line-height:1.45}
+    .dia{aspect-ratio:16/9;border-radius:6px;overflow:hidden;padding:7%;
+      display:flex;flex-direction:column;justify-content:flex-end;border:1px solid var(--lijn)}
+    .dia--titel{background:linear-gradient(152deg,#2a2320,#1a1512 60%,#140f0d)}
+    .dia--sectie{background:#f3e9de}
+    .dia--inhoud{background:#fbf7f2;justify-content:flex-start}
+    .dia h5{margin:0;font-weight:600;letter-spacing:-.022em;line-height:1.12}
+    .handtekening{background:#ffffff;border:1px solid #e7ded2;border-radius:8px;padding:20px 22px;
+      font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#5c534b;margin:18px 0}
+    pre{background:var(--vlak);border:1px solid var(--lijn);border-radius:8px;padding:16px 18px;
+      overflow-x:auto;font-size:.75rem;line-height:1.6;max-width:100%}
+    code{font-size:.85em}
+  </style>
+
+  <!-- ============ DRUKWERK ============ -->
+  <h2 class="kop">Drukwerk</h2>
+
+  <p>Terracotta is precies de kleur die in vierkleurendruk tegenvalt: warme oranjeroden verschuiven op ongestreken papier naar bruin en verliezen hun felheid. Daarom het advies om het accent als <strong>steunkleur</strong> te drukken waar het budget dat toelaat, en de CMYK-opbouw alleen te gebruiken voor digitaal drukwerk en kleine oplages.</p>
+
+  <p class="klein">Ik leg hier bewust <em>geen</em> pantonenummer vast. Dat kies je met een waaier in de hand, naast een proefdruk op het papier dat je echt gaat gebruiken — niet vanaf een scherm. Zoek in de warme oranjerode reeks en leg de kandidaat naast een afdruk van <code>#b4451f</code>.</p>
+
+  <div class="scroll">
+    <table>
+      <tr><th>Kleur</th><th class="num">Hex</th><th class="num">RGB</th><th class="num">CMYK</th><th>Voor drukwerk</th></tr>
+      <tr><td>Terracotta</td><td class="num">#b4451f</td><td class="num">180 69 31</td><td class="num">0 · 62 · 83 · 29</td><td>Bij voorkeur steunkleur</td></tr>
+      <tr><td>Terracotta diep</td><td class="num">#8f3616</td><td class="num">143 54 22</td><td class="num">0 · 68 · 90 · 44</td><td>Alleen digitaal, niet in druk</td></tr>
+      <tr><td>Inkt</td><td class="num">#1a1512</td><td class="num">26 21 18</td><td class="num">0 · 20 · 30 · 90</td><td>Tekst in K100; grote vlakken warm diepzwart</td></tr>
+      <tr><td>Tekst</td><td class="num">#5c534b</td><td class="num">92 83 75</td><td class="num">0 · 10 · 18 · 64</td><td>Liever K70 dan een viervoudige opbouw</td></tr>
+      <tr><td>Papier</td><td class="num">#fbf7f2</td><td class="num">251 247 242</td><td class="num">niet drukken</td><td>Kies warmwit papier</td></tr>
+      <tr><td>Zand</td><td class="num">#f3e9de</td><td class="num">243 233 222</td><td class="num">0 · 4 · 9 · 5</td><td>Rasters onder 10% worden vlekkerig op ongestreken papier</td></tr>
+    </table>
+  </div>
+
+  <h3>Papier</h3>
+  <ul>
+    <li><strong>Warmwit en ongestreken.</strong> Het papier ís de achtergrondkleur; die hoef je niet te drukken. Een helderwit blad maakt de terracotta hard en het geheel klinisch — precies het tegenovergestelde van wat het palet doet.</li>
+    <li><strong>Briefpapier</strong> <span class="cijfer">100</span> tot <span class="cijfer">120&nbsp;g/m²</span>, <strong>visitekaartjes</strong> <span class="cijfer">300</span> tot <span class="cijfer">350&nbsp;g/m²</span>.</li>
+    <li><strong>Geen glans.</strong> Geen gestreken papier, geen vernis, geen folie. Een matte, licht ruwe drager past bij een vereniging die op lange termijn werkt.</li>
+    <li>Vraag altijd een <strong>proefdruk op het echte papier</strong> voor je een oplage vastlegt. Een schermkleur en een gedrukte kleur zijn twee verschillende dingen.</li>
+  </ul>
+
+  <p class="klein">Praktisch punt voor Word en PowerPoint: Instrument Sans moet op de toestellen geïnstalleerd zijn, anders valt alles terug op een systeemletter. Installeer hem centraal, of leg in het sjabloon een terugvalletter vast en gebruik die dan consequent.</p>
+
+  <!-- ============ BRIEFPAPIER ============ -->
+  <h2 class="kop">Briefpapier</h2>
+
+  <p>A4, één kolom, alles links uitgelijnd — dezelfde regel als op de site. Het merkteken staat linksboven, de wettelijke gegevens onderaan in een aparte voet. Die voet is geen decoratie: naam, rechtsvorm, ondernemingsnummer, RPR en zetel horen op elk uitgaand stuk van een vzw.</p>
+
+  <div class="tweeluik" style="align-items:start">
+    <div class="a4">
+      <div class="a4__logo">
+        <svg width="66" height="29" viewBox="4 15 138 60" role="img" aria-label="COI">
+          <g fill="none" stroke-width="11" stroke-linecap="round">
+            <path d="M48.1 28.2 A 22 22 0 1 0 48.1 61.8" stroke="#1a1512"/>
+            <circle cx="90" cy="45" r="22" stroke="#1a1512"/>
+            <path d="M134 23 L134 67" stroke="#b4451f"/>
+          </g>
+        </svg>
+      </div>
+      <div class="a4__geadresseerde">Vlaams Instituut voor<br>Digitale Innovatie<br>Voorbeeldstraat 12<br>1000 Brussel</div>
+      <div class="a4__body">
+        <p style="margin:0 0 7px"><strong>Betreft: steunaanvraag dossier 2026/014</strong></p>
+        <p style="margin:0 0 7px">Leuven, 7 augustus 2026</p>
+        <p style="margin:0 0 7px">Geachte mevrouw,</p>
+        <p style="margin:0">Het bestuursorgaan heeft uw aanvraag besproken op de vergadering van 26 mei. Wij nemen graag de tijd om onze beoordeling toe te lichten…</p>
+      </div>
+      <div class="a4__voet">COI — Centrum voor Ondersteuning van digitale Innovatie vzw · Ondernemingsnummer 0416.237.094 · RPR Leuven<br>Interleuvenlaan 16A, 3001 Leuven · www.coivzw.be</div>
+    </div>
+
+    <div>
+      <h3 style="margin-top:0">Maatvoering</h3>
+      <div class="scroll">
+        <table>
+          <tr><td>Marge links</td><td class="num">24 mm</td></tr>
+          <tr><td>Marge rechts</td><td class="num">20 mm</td></tr>
+          <tr><td>Marge boven</td><td class="num">22 mm</td></tr>
+          <tr><td>Marge onder</td><td class="num">18 mm</td></tr>
+          <tr><td>Hoogte merkteken</td><td class="num">12 mm</td></tr>
+          <tr><td>Adresblok begint op</td><td class="num">55 mm</td></tr>
+          <tr><td>Brieftekst</td><td class="num">10 pt / 15 pt</td></tr>
+          <tr><td>Voettekst</td><td class="num">7 pt / 10 pt</td></tr>
+        </table>
+      </div>
+      <p class="klein">Vervolgbladen dragen geen merkteken en geen voet — alleen het paginanummer rechtsonder. Zo blijft duidelijk welk blad het eerste is.</p>
+    </div>
+  </div>
+
+  <!-- ============ PRESENTATIE ============ -->
+  <h2 class="kop">Presentatie</h2>
+
+  <p>Breedbeeld <span class="cijfer">16:9</span>, <span class="cijfer">1920 × 1080</span>. Drie diasoorten volstaan; wie een vierde nodig heeft, heeft meestal te veel op één dia staan.</p>
+
+  <div class="tweeluik">
+    <div>
+      <div class="dia dia--titel">
+        <svg width="52" height="23" viewBox="4 15 138 60" style="margin-bottom:auto" role="img" aria-label="COI">
+          <g fill="none" stroke-width="11" stroke-linecap="round">
+            <path d="M48.1 28.2 A 22 22 0 1 0 48.1 61.8" stroke="#ffffff"/>
+            <circle cx="90" cy="45" r="22" stroke="#ffffff"/>
+            <path d="M134 23 L134 67" stroke="#b4451f"/>
+          </g>
+        </svg>
+        <h5 style="color:#fff;font-size:1.05rem;max-width:16ch">Jaarverslag aan de algemene vergadering</h5>
+        <p style="color:rgba(255,255,255,.72);font-size:.75rem;margin:7px 0 0">9 juni 2026</p>
+      </div>
+      <p class="meta" style="margin-top:8px">Titeldia — donker verloop, merkteken linksboven</p>
+    </div>
+
+    <div>
+      <div class="dia dia--sectie">
+        <p class="cijfer" style="color:#b4451f;font-size:1.9rem;margin:0 0 2px;line-height:1">02</p>
+        <h5 style="color:#1a1512;font-size:1.05rem">Investeringsfondsen</h5>
+      </div>
+      <p class="meta" style="margin-top:8px">Sectiedia — zandvlak, nummer in de serif</p>
+    </div>
+
+    <div>
+      <div class="dia dia--inhoud">
+        <h5 style="color:#1a1512;font-size:.92rem;margin-bottom:9px">Waar we op werken</h5>
+        <p style="font-size:.72rem;margin:0 0 5px;color:#5c534b">Energie en klimaat</p>
+        <p style="font-size:.72rem;margin:0 0 5px;color:#5c534b">Welzijn en gezondheidszorg</p>
+        <p style="font-size:.72rem;margin:0 0 5px;color:#5c534b">Werk en sociale economie</p>
+        <p style="font-size:.72rem;margin:0;color:#5c534b">Onderwijs en onderzoek</p>
+      </div>
+      <p class="meta" style="margin-top:8px">Inhoudsdia — papier, links uitgelijnd</p>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <tr><th>Element</th><th class="num">Grootte</th><th>Opmerking</th></tr>
+      <tr><td>Titel op titeldia</td><td class="num">54 pt</td><td>Maximaal twee regels</td></tr>
+      <tr><td>Sectienummer</td><td class="num">72 pt</td><td>Instrument Serif, terracotta</td></tr>
+      <tr><td>Diatitel</td><td class="num">36 pt</td><td>Halfvet</td></tr>
+      <tr><td>Tekst op de dia</td><td class="num">20 pt</td><td>Nooit kleiner; wie kleiner moet, splitst de dia</td></tr>
+      <tr><td>Bron of voetnoot</td><td class="num">12 pt</td><td>Zachte tint</td></tr>
+      <tr><td>Marge rondom</td><td class="num">80 px</td><td>Ook links, dus geen gecentreerde tekst</td></tr>
+    </table>
+  </div>
+  <p class="klein">Geen opsommingstekens waar een zin volstaat, geen dia met meer dan zes regels, en het merkteken alleen op de titeldia — niet op elke dia herhalen.</p>
+
+  <!-- ============ HANDTEKENING ============ -->
+  <h2 class="kop">E-mailhandtekening</h2>
+
+  <p>Zonder afbeeldingen. Beeld in een handtekening wordt door de meeste mailprogramma's geblokkeerd tot de ontvanger het toelaat, en dan staat er een leeg kader met een kruisje. Tekst werkt altijd, ook op een telefoon en in een antwoordketen.</p>
+
+  <div class="handtekening">
+    <div style="color:#1a1512;font-weight:bold">Hedwig Vergeylen</div>
+    <div style="color:#5c534b">Bestuurder &amp; Algemeen secretaris</div>
+    <div style="color:#b4451f;font-weight:bold;margin-top:9px">COI vzw</div>
+    <div style="color:#5c534b">Centrum voor Ondersteuning van digitale Innovatie</div>
+    <div style="margin-top:9px"><a href="#" style="color:#8f3616">hedwig.vergeylen@coi.be</a> · <a href="#" style="color:#8f3616">www.coivzw.be</a></div>
+    <div style="color:#6d635a;font-size:11px;margin-top:9px">Interleuvenlaan 16A, 3001 Leuven · Ondernemingsnummer 0416.237.094</div>
+  </div>
+
+  <p class="klein">Te plakken in Outlook of Gmail. Alle opmaak staat in de tag zelf, want mailprogramma's gooien een stijlblok weg.</p>
+
+<pre>&lt;div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#5c534b"&gt;
+  &lt;div style="color:#1a1512;font-weight:bold"&gt;Voornaam Naam&lt;/div&gt;
+  &lt;div&gt;Functie&lt;/div&gt;
+  &lt;div style="color:#b4451f;font-weight:bold;margin-top:9px"&gt;COI vzw&lt;/div&gt;
+  &lt;div&gt;Centrum voor Ondersteuning van digitale Innovatie&lt;/div&gt;
+  &lt;div style="margin-top:9px"&gt;
+    &lt;a href="mailto:naam@coivzw.be" style="color:#8f3616"&gt;naam@coivzw.be&lt;/a&gt; ·
+    &lt;a href="https://www.coivzw.be" style="color:#8f3616"&gt;www.coivzw.be&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div style="color:#6d635a;font-size:11px;margin-top:9px"&gt;
+    Interleuvenlaan 16A, 3001 Leuven · Ondernemingsnummer 0416.237.094
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+  <ul>
+    <li><strong>Arial als letter</strong>, niet Instrument Sans. Een mailprogramma laadt geen lettertype; het valt toch terug, en dan liever op een letter die je zelf kiest.</li>
+    <li><strong>Geen citaat, geen spreuk, geen milieuboodschap</strong> onder de handtekening.</li>
+    <li><strong>Geen disclaimer</strong> tenzij een jurist er expliciet om vraagt. Ze worden zelden gelezen en hebben nauwelijks juridische waarde.</li>
+    <li>Bij een antwoord mag de handtekening ingekort worden tot naam, functie en COI vzw.</li>
+    <li>Zodra het e-mailverkeer naar coivzw.be verhuist, gaan alle adressen mee. Nu staat er nog <code>@coi.be</code>.</li>
+  </ul>
+
+  <!-- ============ FOTOGRAFIE ============ -->
+  <h2 class="kop">Sfeerbeeld en fotografie</h2>
+
+  <p>De site gebruikt vandaag bewust geen foto's. Dat is geen gebrek maar een houding: COI heeft zelf geen fabriek, geen product en geen zaal vol mensen. Wie dat gat vult met gekochte beelden van handdrukken, gloeilampen of serverruimtes, ruilt geloofwaardigheid in voor decoratie — en dat is net het tegenovergestelde van wat een verificateur of een aanvrager zoekt.</p>
+
+  <p>Drie richtingen, van meest naar minst aanbevolen.</p>
+
+  <h3>Richting A — het werk van anderen</h3>
+  <p>Echte beelden uit de initiatieven die COI steunt: een labo, een opleidingslokaal, een team bij een van de fondsen. Documentair, daglicht, geen geposeerde blikken in de lens.</p>
+  <p class="klein"><strong>Waarom.</strong> COI's verhaal is het werk van anderen mogelijk maken. Dan hoort dat werk ook in beeld, niet de vereniging zelf. Het is bovendien het enige beeldmateriaal dat een buitenstaander niet als voorraadfoto herkent.<br>
+  <strong>Waarom niet.</strong> Het vraagt toestemming van elke partij, en het verjaart: een foto van een start-up die intussen gestopt is, werkt tegen je. Reken op een jaarlijkse opfrissing.</p>
+
+  <h3>Richting B — plek en materie, zonder mensen</h3>
+  <p>Details in plaats van overzichten: een werkbank, een detail van een machine, een gang in warm middaglicht. Warme grijzen en aardetinten, één terracotta accent dat in het beeld zelf zit.</p>
+  <p class="klein"><strong>Waarom.</strong> Geen toestemmingen nodig, geen veroudering, en het sluit naadloos aan bij het palet.<br>
+  <strong>Waarom niet.</strong> Zonder mensen wordt het snel steriel, en het risico bestaat dat het alsnog als voorraadfoto oogt. Alleen doen met een fotograaf, niet met een beeldbank.</p>
+
+  <h3>Richting C — geen fotografie, wel schema en cijfer</h3>
+  <p>Het beeld is een grafiek, een schema of een tijdlijn in de eigen kleuren. De jaarkoppen op de projectenpagina zijn hier al een voorafspiegeling van.</p>
+  <p class="klein"><strong>Waarom.</strong> Het is wat COI werkelijk doet: beoordelen, kiezen, middelen verdelen. Het is het goedkoopst, veroudert niet, en het onderscheidt zich meteen van elke andere vzw-site.<br>
+  <strong>Waarom niet.</strong> Het maakt een site zakelijk en koel, en warmte is precies wat het palet zoekt. Daarom niet in plaats van A, maar ernaast.</p>
+
+  <div class="specimen">
+    <h4>Mijn advies</h4>
+    <p style="margin:8px 0 0">Neem <strong>C als basis</strong> en <strong>A als uitzondering</strong>: schema's en cijfers dragen de site, en een enkele echte foto uit een gesteund initiatief per project. Richting B alleen als er ooit budget is voor een eigen fotograaf. En in geen geval een beeldbank — één herkenbare voorraadfoto ondermijnt de hele pagina.</p>
+  </div>
+
+  <h3>Regels als er toch beeld komt</h3>
+  <ul>
+    <li><strong>Nooit tekst op een foto.</strong> Contrast valt niet te garanderen op een beeld dat verandert. Tekst staat op papier, zand of inkt.</li>
+    <li><strong>Warme witbalans</strong>, natuurlijk licht, geen zware filters en geen zwart-wit — dat botst met het palet.</li>
+    <li><strong>Minstens tweemaal de weergavegrootte</strong> aan pixels, anders oogt het zacht op een scherp scherm. Dat gold ook voor de bestuurdersportretten.</li>
+    <li><strong>Elke afbeelding krijgt een Nederlandse alt-tekst</strong> die beschrijft wat er te zien is, niet «foto».</li>
+    <li><strong>Bewaar wie toestemming gaf</strong>, en waarvoor. Zonder dat kan een foto niet online.</li>
+  </ul>
+
+  <!-- ============ OPEN ============ -->
+  <h2 class="kop">Wat dit boek nog niet dekt</h2>
+  <ul>
+    <li><strong>De steunkleur voor druk.</strong> Het nummer moet met een waaier naast een proefdruk gekozen worden, niet vanaf een scherm.</li>
+    <li><strong>Het merkteken in klein formaat.</strong> Onder <span class="cijfer">28&nbsp;px</span> lopen de drie vormen visueel in elkaar. Voor een gunstig alternatief op die maten ligt nog niets vast.</li>
+    <li><strong>Sjablonen als bestand.</strong> Briefpapier en presentatie staan hier als ontwerp beschreven; er is nog geen Word- of PowerPoint-bestand van gemaakt.</li>
+    <li><strong>Sociale media.</strong> Geen profielbeeld, omslag of berichtformaat vastgelegd. Het merkteken in een vierkant vraagt een eigen uitsnede.</li>
+  </ul>
+
+  <footer>
+    <p style="margin:0">COI — Centrum voor Ondersteuning van digitale Innovatie vzw · Ondernemingsnummer <span class="cijfer">0416.237.094</span> · RPR Leuven<br>
+    Afgeleid van de vormgeving van coivzw.be. Verandert de site, dan verandert dit boek mee.</p>
+    <p style="margin:14px 0 0"><a href="../">&larr; Terug naar coivzw.be</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>
