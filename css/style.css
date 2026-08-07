@@ -1,17 +1,96 @@
+/* Lettertypes staan op onze eigen server, niet bij Google.
+   Reden: bij Google Fonts doet de browser van elke bezoeker een verzoek aan
+   fonts.googleapis.com en fonts.gstatic.com, waarbij zijn IP-adres naar Google
+   gaat. Lokaal hosten haalt die partij uit de bezoekersstroom en scheelt ook
+   twee DNS-opzoekingen en twee verbindingen bij het laden.
+
+   Instrument Sans is variabel (400-700 in één bestand) en Instrument Serif is
+   als paar ontworpen; samen 74 KB. font-display: swap toont meteen tekst in de
+   systeemletter en wisselt zodra het bestand er is. */
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/instrument-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/instrument-sans-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/instrument-serif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/instrument-serif-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
-  --color-primary: #4865f7;
-  /* Iets donkerder dan --color-primary, enkel voor linktekst: het merkblauw haalt
-     op wit net 4,69:1 en dat is te krap voor lopende tekst. */
-  --color-link: #3448cd;
-  --color-text: #4d4d5d;
-  /* Voor bijschriften en meta-regels. Vervangt #9a9aa8 en #8b8d9a, die op wit
-     onder de leesbaarheidsdrempel van 4,5:1 bleven. */
-  --color-muted: #666877;
-  --color-dark: #1f2233;
-  --color-bg-alt: #f1f3f9;
-  --font-heading: "Prata", serif;
-  --font-body: "Montserrat", sans-serif;
+  /* Palet "Klei": terracotta accent op warm papier.
+     Alle kleuren op de site komen uit deze lijst; er staat verder nergens nog
+     een kleurwaarde los in het bestand. Een richtingswijziging is dus een
+     kwestie van dit blok aanpassen. */
+  --color-primary: #b4451f;   /* knoppen, accenten */
+  --color-primary-diep: #93381a; /* knop bij hover */
+  --color-link: #8f3616;      /* linktekst: donkerder, want die heeft 4,5:1 nodig */
+
+  --color-text: #5c534b;
+  /* Net donker genoeg om ook op het zandvlak (--color-bg-alt) boven 4,5:1 te
+     blijven; op #756b62 haalde de sectie-inleiding daar maar 4,34:1. */
+  --color-muted: #6d635a;
+  --color-dark: #1a1512;      /* koppen, voettekst, hero */
+  --color-bg: #fbf7f2;        /* papier */
+  --color-surface: #ffffff;   /* kaarten, die liggen op het papier */
+  --color-bg-alt: #f3e9de;    /* afwisselende secties en logokaders */
+  --color-line: #e7ded2;
+  --color-line-diep: #d8c9b7; /* rand van een kaart bij hover */
+
+  /* Voettekst staat op --color-dark; deze twee zijn de leesbare tinten daarop. */
+  --color-op-donker: #c3b8ad;
+  --color-op-donker-zacht: #9c9089;
+
+  /* De serif is gereserveerd voor cijfers: jaartallen op de projectenpagina, de
+     nummers van de basisvoorwaarden, de tijdlijn. Daar geeft hij karakter
+     zonder de koppen een uitgeverslook te bezorgen. */
+  --font-heading: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-kop-klein: var(--font-body);
   --max-width: 1140px;
+
+  /* EÃƒÆ’Ã‚Â©n gedeelde versnellingscurve en duur voor alle overgangen. Zo bewegen
+     knoppen, kaarten, navigatie en de scroll-animaties op dezelfde manier. */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --snel: 0.2s;
+  --traag: 0.7s;
+
+  /* Verticale ademruimte per sectie, meeschalend met de vensterbreedte. */
+  --sectie-ruimte: clamp(72px, 9vw, 128px);
 }
 
 * {
@@ -26,15 +105,16 @@ html {
      in donkere modus zelf het canvas, terwijl onze tekstkleuren donker blijven -
      dan staat bijna-zwarte tekst op een zwarte achtergrond. */
   color-scheme: only light;
-  background-color: #fff;
+  background-color: var(--color-bg);
 }
 
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
   /* Expliciet, niet transparant: anders schijnt het canvas van de browser door. */
-  background-color: #fff;
+  background-color: var(--color-bg);
 }
 
 .container {
@@ -43,15 +123,32 @@ body {
   padding: 0 24px;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-heading);
+/* Koppen staan in de schreefloze letter, niet in de serif. Een display-serif
+   geeft de site een uitgeverskarakter dat vloekt met de rest; halfvet en strak
+   gespatieerd sluit beter aan bij de opmaak. De serif blijft wel in gebruik,
+   maar uitsluitend voor cijfers - zie .jaar-kop en .voorwaarde__nr. */
+h1, h2 {
+  font-family: var(--font-body);
   color: var(--color-dark);
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.14;
+}
+
+/* h3 is bijna altijd een kaarttitel of een tussenkop van 17 tot 20 px. Daar
+   houdt de serif niet stand; de sans in halfvet leest daar beter. */
+h3 {
+  font-family: var(--font-kop-klein);
+  color: var(--color-dark);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
 }
 
 a {
   color: var(--color-link);
   text-decoration: none;
+  transition: color var(--snel) var(--ease);
 }
 
 /* Header */
@@ -61,8 +158,9 @@ a {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  background: rgba(251, 247, 242, 0.94);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .header__inner {
@@ -89,10 +187,25 @@ a {
   flex-shrink: 0;
 }
 
+/* De naam naast het merkteken: de afkorting groot in de kopletter, de voluit
+   geschreven naam eronder als kleinkapitaal. Zo staat er een echte lockup in
+   plaats van twee regels kleine tekst. */
 .header__logo-text {
-  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Het merkteken leest zelf al C-O-I, dus de afkorting hoeft er niet naast.
+   Wat er wel bij moet, is waar die drie letters voor staan. */
+.header__logo-sub {
+  font-size: 0.68rem;
   font-weight: 600;
-  line-height: 1.2;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  max-width: 20ch;
+  color: var(--color-muted);
 }
 
 .nav__list {
@@ -105,7 +218,7 @@ a {
   color: var(--color-dark);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  transition: color var(--snel) var(--ease);
 }
 
 .nav__list a:hover {
@@ -132,79 +245,107 @@ a {
   margin: 0 auto;
 }
 
-/* Hero */
+/* Hero. Geen foto meer: een rustig verloop in de eigen kleuren, met een
+   zachte lichtplek zodat het vlak niet dood aanvoelt. Geen achtergrondbeeld
+   betekent ook ruim een megabyte minder om te laden. */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 480px;
+  /* Bewust laag gehouden: de bezoeker moet "Wie we zijn" al zien staan zonder
+     eerst een schermvullend beeld weg te scrollen. */
+  min-height: min(56vh, 480px);
   display: flex;
   align-items: center;
-  background-size: cover;
-  background-position: center;
+  padding: 128px 0 72px;
   color: #fff;
-}
-
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(31, 34, 51, 0.85), rgba(72, 101, 247, 0.6));
+  background:
+    radial-gradient(115% 95% at 16% 10%, rgba(180, 69, 31, 0.34) 0%, rgba(180, 69, 31, 0) 60%),
+    linear-gradient(152deg, #2a2320 0%, #1a1512 60%, #140f0d 100%);
+  overflow: hidden;
 }
 
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 720px;
+  max-width: 760px;
 }
 
 .hero h1 {
   color: #fff;
-  font-size: 2.6rem;
-  margin-bottom: 20px;
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+  margin-bottom: 22px;
 }
 
 .hero p {
-  font-size: 1.15rem;
-  margin-bottom: 28px;
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  margin-bottom: 32px;
+  max-width: 60ch;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* De hero staat bovenaan het scherm en heeft dus geen scroll-trigger nodig;
+   die komt gewoon binnen bij het laden. */
+.js-reveal .hero__content > * {
+  animation: hero-in 0.8s var(--ease) both;
+}
+
+.js-reveal .hero__content > *:nth-child(2) { animation-delay: 0.08s; }
+.js-reveal .hero__content > *:nth-child(3) { animation-delay: 0.16s; }
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
 }
 
 .btn {
   display: inline-block;
   background: var(--color-primary);
   color: #fff;
-  padding: 14px 32px;
+  padding: 15px 34px;
   border-radius: 4px;
   font-weight: 600;
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 1rem;
-  transition: background 0.2s;
+  transition: background var(--snel) var(--ease),
+              transform var(--snel) var(--ease),
+              box-shadow var(--snel) var(--ease);
 }
 
 .btn:hover {
-  background: #2f48d6;
+  background: var(--color-primary-diep);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(29, 27, 26, 0.16);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 /* Sections */
 .section {
-  padding: 90px 0;
+  padding: var(--sectie-ruimte) 0;
 }
 
 .section--alt {
   background: var(--color-bg-alt);
 }
 
+/* Alles lijnt links uit. De rasters eronder (kaarten, bestuurders, projecten)
+   beginnen aan de linkerrand van de container; een gecentreerde titel zou daar
+   los boven zweven. Gecentreerde lopende tekst leest bovendien trager, omdat
+   het oog elke regel op een andere plek moet terugvinden. */
 .section__title {
-  font-size: 2.2rem;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
   margin-bottom: 40px;
-  text-align: center;
+  max-width: 24ch;
 }
 
 .section__intro {
-  text-align: center;
-  margin-top: -20px;
-  margin-bottom: 40px;
-  color: var(--color-text);
+  margin-top: -26px;
+  margin-bottom: 44px;
+  max-width: 62ch;
+  color: var(--color-muted);
 }
 
 /* About */
@@ -233,18 +374,22 @@ a {
 }
 
 .project-card {
-  background: #fff;
-  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(29, 27, 26, 0.04);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--snel) var(--ease),
+              box-shadow var(--snel) var(--ease),
+              border-color var(--snel) var(--ease);
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-line-diep);
+  box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
 }
 
 /* Elk logo staat in hetzelfde lichtgrijze kader - een lichte drager, want zo
@@ -288,20 +433,33 @@ a {
 .project-card__body h3 {
   font-size: 1.1rem;
   margin-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
 }
 
-.project-card__year {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--color-link);
-  font-weight: 600;
-  background: var(--color-bg-alt);
-  padding: 2px 10px;
-  border-radius: 12px;
+/* Jaartal als tussenkop over de volle breedte van het raster. Zo leest de
+   pagina als een tijdlijn van 2013 tot vandaag in plaats van als een catalogus.
+   De kop staat in het raster zelf, dus er is geen extra omhullende laag nodig. */
+.jaar-kop {
+  grid-column: 1 / -1;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.jaar-kop:first-child {
+  margin-top: 0;
+}
+
+/* Lijn die vanaf het jaartal doorloopt tot de rechterrand. */
+.jaar-kop::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
 }
 
 .project-card__body p {
@@ -309,13 +467,45 @@ a {
   color: var(--color-text);
 }
 
+/* Oproep. Sluit de startpagina af met de vraag die nergens anders prominent
+   stond: heeft u een initiatief? Donker vlak, zodat het losstaat van de rest. */
+.oproep {
+  background: var(--color-dark);
+}
+
+.oproep__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px 40px;
+}
+
+.oproep__tekst {
+  max-width: 56ch;
+}
+
+.oproep h2 {
+  color: #fff;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-bottom: 10px;
+}
+
+.oproep p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.oproep .btn {
+  flex-shrink: 0;
+}
+
 /* Timeline */
 .timeline {
   max-width: 760px;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
   padding-left: 32px;
-  border-left: 3px solid var(--color-bg-alt);
+  border-left: 2px solid var(--color-line);
 }
 
 .timeline__item {
@@ -336,7 +526,7 @@ a {
   height: 16px;
   border-radius: 50%;
   background: var(--color-primary);
-  border: 3px solid #fff;
+  border: 3px solid var(--color-bg);
 }
 
 .timeline__year {
@@ -354,7 +544,7 @@ a {
 }
 
 .board-member {
-  text-align: center;
+  text-align: left;
 }
 
 .board-member img {
@@ -375,6 +565,27 @@ a {
   font-size: 0.85rem;
   color: var(--color-primary);
   font-weight: 600;
+}
+
+/* Het LinkedIn-teken staat als SVG in de pagina zelf, niet uit een
+   iconenbibliotheek. Zo blijft het bij één bestand minder om te laden en erft
+   het gewoon de tekstkleur mee. */
+.board-member__li {
+  display: inline-flex;
+  margin-top: 9px;
+  color: var(--color-muted);
+  transition: color var(--snel) var(--ease), transform var(--snel) var(--ease);
+}
+
+.board-member__li svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.board-member__li:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
 /* Contact */
@@ -409,7 +620,7 @@ a {
 .contact__form input,
 .contact__form textarea {
   padding: 12px 14px;
-  border: 1px solid #d9dce5;
+  border: 1px solid var(--color-line);
   border-radius: 4px;
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -442,7 +653,7 @@ a {
 
 .footer__legal {
   margin-top: 8px;
-  color: #b7b9c4;
+  color: var(--color-op-donker);
   line-height: 1.7;
 }
 
@@ -459,13 +670,57 @@ a {
 
 .footer__copy {
   margin-top: 12px;
-  color: #8b8d9a;
+  color: var(--color-op-donker-zacht);
 }
 
 .footer__logo {
   height: 36px;
   width: auto;
   margin-bottom: 16px;
+}
+
+/* Scroll-animatie.
+
+   De klasse js-reveal wordt door script.js op <html> gezet, en alleen wanneer
+   JavaScript draait en de bezoeker geen verminderde beweging heeft gevraagd.
+   Zonder die klasse staat alles gewoon zichtbaar: valt het script uit, dan
+   blijft de pagina leesbaar in plaats van leeg. Dat geldt ook voor zoekmachines. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--traag) var(--ease),
+              transform var(--traag) var(--ease);
+  transition-delay: var(--reveal-vertraging, 0s);
+}
+
+/* Wie beweging heeft uitgezet, krijgt ook hier niets. Dubbel op met de check in
+   het script, maar zo blijft het waar als iemand later de klasse anders zet. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js-reveal .reveal,
+  .js-reveal .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .js-reveal .hero__content > * {
+    animation: none;
+  }
+
+  .btn:hover,
+  .card:hover,
+  .project-card:hover {
+    transform: none;
+  }
 }
 
 /* Page hero (binnenpagina's) - compacter dan de hero op de homepage,
@@ -482,7 +737,7 @@ a {
 .page-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(31, 34, 51, 0.9), rgba(72, 101, 247, 0.65));
+  background: linear-gradient(135deg, rgba(26, 21, 18, 0.94), rgba(180, 69, 31, 0.62));
 }
 
 .page-hero__content {
@@ -530,18 +785,33 @@ a {
 }
 
 .card {
-  background: #fff;
-  border-radius: 8px;
-  padding: 28px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(29, 27, 26, 0.04);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--snel) var(--ease),
+              box-shadow var(--snel) var(--ease),
+              border-color var(--snel) var(--ease);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-line-diep);
+  box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
+}
+
+/* De doorverwijzing schuift mee bij hover over de hele kaart. Inline-block is
+   nodig: op een gewoon inline-element heeft transform geen effect. */
+.card__link {
+  display: inline-block;
+  transition: transform var(--snel) var(--ease);
+}
+
+.card:hover .card__link {
+  transform: translateX(4px);
 }
 
 .card h3 {
@@ -560,32 +830,12 @@ a {
   font-size: 0.9rem;
 }
 
-/* Feitenstrook */
-.facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 28px;
-  text-align: center;
-}
-
-.fact__value {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  color: var(--color-primary);
-  line-height: 1.2;
-}
-
-.fact__label {
-  font-size: 0.9rem;
-  margin-top: 6px;
-}
-
 /* Identiteitskader (rechtsvorm, ondernemingsnummer, zetel) */
 .identity {
   max-width: 760px;
   margin: 40px auto 0;
-  background: #fff;
-  border: 1px solid #e2e5ee;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
   border-left: 4px solid var(--color-primary);
   border-radius: 6px;
   padding: 24px 28px;
@@ -614,8 +864,8 @@ a {
 
 /* Lopende tekst (over ons, criteria, juridische pagina's) */
 .prose {
-  max-width: 760px;
-  margin: 0 auto;
+  max-width: 68ch;
+  margin: 0;
 }
 
 .prose h2 {
@@ -662,7 +912,7 @@ a {
 
 .prose th,
 .prose td {
-  border: 1px solid #e2e5ee;
+  border: 1px solid var(--color-line);
   padding: 10px 12px;
   text-align: left;
   vertical-align: top;
@@ -680,15 +930,88 @@ a {
   margin-bottom: 30px;
 }
 
+/* De drie basisvoorwaarden. Als opsommingstekens onder elkaar lezen ze als een
+   bijzaak; als genummerde blokken naast elkaar zie je meteen dat het er drie
+   zijn en dat ze even zwaar wegen. */
+.voorwaarden {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin: 34px 0 40px;
+}
+
+.voorwaarde {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 26px 24px 24px;
+}
+
+.voorwaarde__nr {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.voorwaarde h3 {
+  font-size: 1.02rem;
+  margin-bottom: 8px;
+}
+
+.voorwaarde p {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+/* Vormen van steun. Was een tabel van drie kolommen die op een telefoon moest
+   scrollen; als blokken past dezelfde inhoud op elk scherm zonder scrollen. */
+.steunvormen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin: 30px 0 44px;
+}
+
+.steunvorm {
+  background: var(--color-bg-alt);
+  border-radius: 10px;
+  padding: 26px 24px;
+}
+
+.steunvorm h3 {
+  font-size: 1.02rem;
+  margin-bottom: 10px;
+}
+
+.steunvorm p {
+  font-size: 0.9rem;
+}
+
+.steunvorm__wanneer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-line-diep);
+  color: var(--color-muted);
+}
+
+.steunvorm__wanneer span {
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
 /* Documentenlijst */
 .doc-list {
   max-width: 760px;
-  margin: 0 auto;
+  margin: 0;
   list-style: none;
 }
 
 .doc-list li {
-  border-bottom: 1px solid #e2e5ee;
+  border-bottom: 1px solid var(--color-line);
   padding: 18px 0;
   display: flex;
   flex-wrap: wrap;
@@ -697,7 +1020,7 @@ a {
 }
 
 .doc-list li:first-child {
-  border-top: 1px solid #e2e5ee;
+  border-top: 1px solid var(--color-line);
 }
 
 .doc-list__title {
@@ -715,7 +1038,7 @@ a {
 .project-card__role {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid #e9ebf2;
+  border-top: 1px solid var(--color-line);
   font-size: 0.82rem;
   color: var(--color-muted);
 }
@@ -744,8 +1067,8 @@ a {
     top: 80px;
     left: 0;
     right: 0;
-    background: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background: var(--color-bg);
+    box-shadow: 0 6px 14px rgba(29, 27, 26, 0.10);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
@@ -763,7 +1086,7 @@ a {
   }
 
   .nav__list li {
-    border-bottom: 1px solid var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .nav__list a {
@@ -775,7 +1098,9 @@ a {
     display: flex;
   }
 
-  .header__logo-text {
+  /* Op een smal scherm blijft alleen het merkteken staan; de voluit geschreven
+     naam past er niet naast het menuknopje. */
+  .header__logo-sub {
     display: none;
   }
 
