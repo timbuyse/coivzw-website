@@ -33,7 +33,6 @@
   --lijn:#e7ded2; --accent:#b4451f;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
-}
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--grond);color:var(--inkt);
@@ -85,6 +84,17 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .regel--nee{border-top-color:var(--lijn)}
 .regel h4{margin:0 0 6px;font-size:1rem;font-weight:600}
 .regel p{font-size:.9375rem;color:var(--zacht);margin:0}
+
+/* Maatstaal voor het compacte teken. De vakjes tonen het teken op ware
+   grootte, niet geschaald — een staal dat je moet vergroten bewijst niets
+   over leesbaarheid op die maat. Houdt zijn eigen grond vast, net als
+   .specimen hierboven. */
+.maten{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0}
+.maat{background:var(--merk-bg);border:1px solid var(--merk-line);border-radius:10px;
+  padding:18px 22px;min-width:106px;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;gap:12px}
+.maat svg{display:block}
+.maat__label{font-size:.8125rem;color:var(--merk-muted);font-variant-numeric:tabular-nums}
 
 .logovak{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin:20px 0}
 .logovak > div{border:1px solid var(--merk-line);border-radius:10px;padding:26px 30px;
@@ -188,6 +198,42 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
 
   <h3>Onder 28 px</h3>
   <p class="klein">Daar valt het woordbeeld dicht. Gebruik dan het compacte teken: dezelfde drie letters in een raster van <span class="cijfer">100 × 100</span> eenheden, in een donker vierkant met een straal van <span class="cijfer">20</span>. Lijndikte <span class="cijfer">7,5</span> in plaats van <span class="cijfer">11</span> — dunner houdt op kleine maat geen stand. De C op middelpunt <span class="cijfer">(28, 50)</span> en de O op <span class="cijfer">(58, 50)</span>, beide met straal <span class="cijfer">10</span>; de I loopt van <span class="cijfer">(82, 38)</span> tot <span class="cijfer">(82, 62)</span>. De opening van de C wijst naar rechts, dus haar verste ink zijn de twee eindkappen op x <span class="cijfer">38,8</span>, terwijl de buitenrand van de O op x <span class="cijfer">44,25</span> ligt: <span class="cijfer">5,4</span> eenheid lucht ertussen. Die lucht is het hele punt. In de vorige tekening raakten C en O elkaar, en dan leest het op <span class="cijfer">16&nbsp;px</span> als één vorm. Boven <span class="cijfer">28&nbsp;px</span> altijd het volledige merkteken.</p>
+
+  <div class="maten">
+    <div class="maat">
+      <svg width="16" height="16" viewBox="0 0 100 100" role="img" aria-label="Het compacte merkteken op 16 px">
+        <rect width="100" height="100" rx="20" fill="#1a1512"/>
+        <g fill="none" stroke-width="7.5" stroke-linecap="round">
+          <path d="M35.07 42.93 A 10 10 0 1 0 35.07 57.07" stroke="#fbf7f2"/>
+          <circle cx="58" cy="50" r="10" stroke="#fbf7f2"/>
+          <path d="M82 38 L82 62" stroke="#b4451f"/>
+        </g>
+      </svg>
+      <span class="maat__label"><span class="cijfer">16</span> px</span>
+    </div>
+    <div class="maat">
+      <svg width="32" height="32" viewBox="0 0 100 100" role="img" aria-label="Het compacte merkteken op 32 px">
+        <rect width="100" height="100" rx="20" fill="#1a1512"/>
+        <g fill="none" stroke-width="7.5" stroke-linecap="round">
+          <path d="M35.07 42.93 A 10 10 0 1 0 35.07 57.07" stroke="#fbf7f2"/>
+          <circle cx="58" cy="50" r="10" stroke="#fbf7f2"/>
+          <path d="M82 38 L82 62" stroke="#b4451f"/>
+        </g>
+      </svg>
+      <span class="maat__label"><span class="cijfer">32</span> px</span>
+    </div>
+    <div class="maat">
+      <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="Het compacte merkteken op 64 px">
+        <rect width="100" height="100" rx="20" fill="#1a1512"/>
+        <g fill="none" stroke-width="7.5" stroke-linecap="round">
+          <path d="M35.07 42.93 A 10 10 0 1 0 35.07 57.07" stroke="#fbf7f2"/>
+          <circle cx="58" cy="50" r="10" stroke="#fbf7f2"/>
+          <path d="M82 38 L82 62" stroke="#b4451f"/>
+        </g>
+      </svg>
+      <span class="maat__label"><span class="cijfer">64</span> px</span>
+    </div>
+  </div>
 
   <div class="tweeluik">
     <div class="regel">
