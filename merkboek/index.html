@@ -94,6 +94,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   padding:18px 22px;min-width:106px;display:flex;flex-direction:column;
   align-items:center;justify-content:flex-end;gap:12px}
 .maat svg{display:block}
+.maat--rond svg{border-radius:50%}
 .maat__label{font-size:.8125rem;color:var(--merk-muted);font-variant-numeric:tabular-nums}
 
 .logovak{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin:20px 0}
@@ -571,12 +572,83 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
     <li><strong>Bewaar wie toestemming gaf</strong>, en waarvoor. Zonder dat kan een foto niet online.</li>
   </ul>
 
+  <!-- ============ SOCIALE MEDIA ============ -->
+  <h2 class="kop">Sociale media</h2>
+
+  <p>COI heeft vandaag geen eigen account. Dit kapittel legt vast wat er geldt zodra er een komt, zodat die keuzes niet gemaakt worden op het moment dat iemand haastig een pagina aanmaakt. Alles hieronder volgt uit wat er al in dit boek staat; er komt geen nieuwe vorm bij.</p>
+
+  <h3>Het profielbeeld</h3>
+  <p>Het compacte teken uit het kapittel over het merkteken, maar <strong>zonder de ronde hoeken</strong>. Een vierkant met een straal van <span class="cijfer">20</span> is de juiste vorm voor een favicon, waar de browser niets wegsnijdt. Elk platform snijdt zelf: rond bij een persoonlijk profiel, een afgeronde rechthoek bij een organisatiepagina, en dat verandert zonder aankondiging. Twee keer afronden geeft een dunne rand die niemand bedoeld heeft. Lever dus de inkt over het volle vierkant en laat het platform de vorm bepalen.</p>
+
+  <div class="maten">
+    <div class="maat">
+      <svg width="96" height="96" viewBox="0 0 100 100" role="img" aria-label="Het profielbeeld als vol vierkant">
+        <rect width="100" height="100" fill="#1a1512"/>
+        <g fill="none" stroke-width="7.5" stroke-linecap="round">
+          <path d="M35.07 42.93 A 10 10 0 1 0 35.07 57.07" stroke="#fbf7f2"/>
+          <circle cx="58" cy="50" r="10" stroke="#fbf7f2"/>
+          <path d="M82 38 L82 62" stroke="#b4451f"/>
+        </g>
+      </svg>
+      <span class="maat__label">wat u aanlevert</span>
+    </div>
+    <div class="maat maat--rond">
+      <svg width="96" height="96" viewBox="0 0 100 100" role="img" aria-label="Hetzelfde profielbeeld, rond uitgesneden door het platform">
+        <rect width="100" height="100" fill="#1a1512"/>
+        <g fill="none" stroke-width="7.5" stroke-linecap="round">
+          <path d="M35.07 42.93 A 10 10 0 1 0 35.07 57.07" stroke="#fbf7f2"/>
+          <circle cx="58" cy="50" r="10" stroke="#fbf7f2"/>
+          <path d="M82 38 L82 62" stroke="#b4451f"/>
+        </g>
+      </svg>
+      <span class="maat__label">wat het platform toont</span>
+    </div>
+  </div>
+
+  <p class="klein">De uitsnede kan geen letter raken, en dat is narekenbaar. De verste ink zijn de twee eindkappen van de I, op <span class="cijfer">37,93</span> eenheden van het midden; een ronde uitsnede loopt op <span class="cijfer">50</span>. Er blijft dus <span class="cijfer">12</span> eenheden lucht, bijna een kwart van de straal. Vandaar ook dat het teken niet groter mag: schuif de letters naar buiten en de eerste ronde uitsnede snijdt de I af.</p>
+
+  <p class="klein">Renderen uit de tekening, niet uit een bestaande bitmap opschalen. <span class="cijfer">400 × 400</span> is ruim genoeg voor elk platform van vandaag; vraagt er een meer, render dan opnieuw.</p>
+
+  <h3>De omslag</h3>
+  <p>Een omslagbeeld is extreem breed — op een organisatiepagina makkelijk zes keer breder dan hoog. Daar past het compacte teken niet in: dat is vierkant, en vierkant in een strook betekent negentig procent leegte of een teken dat mee uitgerekt wordt. Gebruik daar het volledige woordbeeld, links uitgelijnd, op zand of op inkt, met de gebruikelijke vrije ruimte van minstens de hoogte van de O.</p>
+
+  <p class="klein">Houd de linkeronderhoek leeg. De meeste platformen leggen de profielfoto daar half over de omslag, en wat eronder zit is weg. Reken op een kwart van de breedte. Geen tekst in de omslag verder dan de naam die er al staat: een omslag wordt op een telefoon een strookje van enkele millimeters hoog.</p>
+
+  <h3>Een bericht</h3>
+  <ul>
+    <li><strong>Vierkant of staand</strong>, <span class="cijfer">1 : 1</span> of <span class="cijfer">4 : 5</span>. Liggend beeld wordt in een tijdlijn op een telefoon het kleinst weergegeven.</li>
+    <li><strong>Tekst op papier, zand of inkt</strong> — nooit op een foto. Dezelfde regel als in het kapittel hiervoor, en om dezelfde reden: op een beeld dat verandert valt contrast niet te garanderen.</li>
+    <li><strong>Eén gedachte per bericht</strong>, twee regels hoogstens, uit de bovenste stappen van de schaal. Een berichtbeeld dat volgeschreven is, leest niemand.</li>
+    <li><strong>Cijfers in Instrument Serif</strong>, zoals overal in dit boek. Dat is het enige wat een berichtbeeld van COI meteen herkenbaar maakt.</li>
+    <li><strong>Geen merkteken in de hoek</strong> van elk beeld. Het account draagt het al in het profielbeeld; nog een keer is ruis.</li>
+  </ul>
+
+  <h3>Toon</h3>
+  <p>Dezelfde als in het kapittel over taal en toon: Nederlands, u-vorm, feiten voor bijvoeglijke naamwoorden, en beginnen bij het vraagstuk in plaats van bij de vereniging. Wat daar nog bijkomt, geldt alleen hier.</p>
+  <ul>
+    <li><strong>Hoogstens drie hashtags</strong>, in het Nederlands, en alleen als ze een vindbaar onderwerp aanduiden. Geen rij Engelse woorden onder een Nederlandse tekst.</li>
+    <li><strong>Geen emoji als opsommingsteken.</strong> Een streepje doet hetzelfde en veroudert niet.</li>
+    <li><strong>Noem de partij bij naam</strong> als een bericht over een gesteund initiatief gaat, en vraag of het mag voor u het plaatst — net als bij fotografie.</li>
+  </ul>
+
+  <h3>Wat niet</h3>
+  <ul>
+    <li><strong>Geen ingesloten volgknop, badge of tijdlijn op coivzw.be.</strong> Die laadt van een externe server, en de privacy- en cookiepagina stellen dat er geen enkel extern verzoek vertrekt. Een gewone tekstlink naar het profiel mag wel: dat is een link, geen verzoek.</li>
+    <li><strong>Nooit de kleur van het platform overnemen.</strong> Het palet heeft geen blauw, en een bericht in platformblauw hoort bij het platform in plaats van bij COI.</li>
+    <li><strong>Geen automatische kruisposting.</strong> Wat op het ene kanaal past, leest op het andere als doorgestuurde post.</li>
+    <li><strong>Het merkteken niet in een cirkel tekenen.</strong> Lever het vierkant aan; de uitsnede is niet aan ons.</li>
+  </ul>
+
+  <div class="specimen">
+    <h4>Mijn advies</h4>
+    <p style="margin:8px 0 0">Eén kanaal, en dat is <strong>LinkedIn</strong>: daar zitten de verenigingen, de fondsen en de institutionele partners waar COI mee werkt. En begin er alleen aan als er iets te melden valt — een goedgekeurd dossier, een jaarrekening, een nieuw initiatief. Een verlaten account met drie berichten uit 2026 is schadelijker dan geen account, want wie nagaat of de vereniging actief is, vindt dan het bewijs dat ze het niet is.</p>
+  </div>
+
   <!-- ============ OPEN ============ -->
   <h2 class="kop">Wat dit boek nog niet dekt</h2>
   <ul>
     <li><strong>De steunkleur voor druk.</strong> Het nummer moet met een waaier naast een proefdruk gekozen worden, niet vanaf een scherm.</li>
     <li><strong>Sjablonen als bestand.</strong> Briefpapier en presentatie staan hier als ontwerp beschreven; er is nog geen Word- of PowerPoint-bestand van gemaakt.</li>
-    <li><strong>Sociale media.</strong> Geen profielbeeld, omslag of berichtformaat vastgelegd. Het merkteken in een vierkant vraagt een eigen uitsnede.</li>
   </ul>
 
   <footer>
