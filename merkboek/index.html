@@ -74,6 +74,12 @@ h3{font-size:1.1875rem;margin:34px 0 8px}
 .staal__rol{font-size:.8125rem;color:var(--zacht);margin-top:3px}
 
 table{width:100%;border-collapse:collapse;font-size:.9375rem;margin:18px 0}
+/* Het handtekeningvoorbeeld is nagebootste e-mail-HTML, geen tabel van dit
+   document. De algemene th,td-regel hieronder zou de haarlijn een celvulling
+   en een onderrand geven, en dan toont het voorbeeld iets anders dan wat er
+   in de mail belandt. */
+.handtekening table{width:auto;margin:0}
+.handtekening td{padding:0;border:0}
 th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--lijn);vertical-align:top}
 th{font-weight:600;font-size:.8125rem;letter-spacing:.05em;text-transform:uppercase;color:var(--zacht)}
 td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -504,6 +510,9 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
   <p>Zonder afbeeldingen. Beeld in een handtekening wordt door de meeste mailprogramma's geblokkeerd tot de ontvanger het toelaat, en dan staat er een leeg kader met een kruisje. Tekst werkt altijd, ook op een telefoon en in een antwoordketen.</p>
 
   <div class="handtekening">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 11px">
+      <tr><td width="280" height="1" bgcolor="#e7ded2" style="width:280px;height:1px;line-height:1px;font-size:0">&nbsp;</td></tr>
+    </table>
     <div style="color:#1a1512;font-weight:bold">Hedwig Vergeylen</div>
     <div style="color:#5c534b">Bestuurder &amp; Algemeen secretaris</div>
     <div style="color:#b4451f;font-weight:bold;margin-top:9px">COI vzw</div>
@@ -515,6 +524,11 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
   <p class="klein">Te plakken in Outlook of Gmail. Alle opmaak staat in de tag zelf, want mailprogramma's gooien een stijlblok weg.</p>
 
 <pre>&lt;div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#5c534b"&gt;
+  &lt;table role="presentation" cellpadding="0" cellspacing="0" border="0"
+         style="border-collapse:collapse;margin:0 0 11px"&gt;
+    &lt;tr&gt;&lt;td width="280" height="1" bgcolor="#e7ded2"
+            style="width:280px;height:1px;line-height:1px;font-size:0"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
   &lt;div style="color:#1a1512;font-weight:bold"&gt;Voornaam Naam&lt;/div&gt;
   &lt;div&gt;Functie&lt;/div&gt;
   &lt;div style="color:#b4451f;font-weight:bold;margin-top:9px"&gt;COI vzw&lt;/div&gt;
@@ -529,6 +543,8 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
 &lt;/div&gt;</pre>
 
   <ul>
+    <li><strong>Een haarlijn boven de naam</strong>, in de lijnkleur van het merk en <span class="cijfer">280</span> px breed — niet de volle berichtbreedte, want dan wordt het een streep door de mail in plaats van een afscheiding onder de tekst. Zonder die lijn loopt de laatste zin van een bericht over in de naam. Ze is getekend als tabelcel met een achtergrondkleur en niet als <code>border-top</code> of <code>&lt;hr&gt;</code>: klassieke Outlook laat een bericht door Word renderen, en Word gooit een randlijn soms weg. Een gevulde cel overleeft dat.</li>
+    <li><strong>Niet het scheidingsteken</strong> <code>-- </code> uit de plattetekstwereld. Sommige programma's herkennen die regel en klappen de handtekening dicht, maar Outlook zet hem niet en gebruikt hem niet.</li>
     <li><strong>Arial als letter</strong>, niet Instrument Sans. Een mailprogramma laadt geen lettertype; het valt toch terug, en dan liever op een letter die je zelf kiest.</li>
     <li><strong>Geen citaat, geen spreuk, geen milieuboodschap</strong> onder de handtekening.</li>
     <li><strong>Geen disclaimer</strong> tenzij een jurist er expliciet om vraagt. Ze worden zelden gelezen en hebben nauwelijks juridische waarde.</li>
