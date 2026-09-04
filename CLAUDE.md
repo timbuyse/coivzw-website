@@ -37,7 +37,16 @@ GitHub Pages rechtstreeks serveert.
 
 `.claude/launch.json` definieert één server: **`coivzw` op poort 5502**. Start
 die via het preview-gereedschap, niet met Python vanaf de opdrachtregel. Het pad
-naar de interpreter staat vastgelegd; `python` en `node` staan niet op PATH.
+naar de interpreter staat daar vastgelegd.
+
+**`python` staat wél op PATH** (3.14), en `py` ook. Eerder stond hier het
+tegendeel; dat is achterhaald. `node` is niet nagekeken. Er staan geen
+buitenstaande pakketten in die Python: `python-docx`, `python-pptx` en `PIL`
+ontbreken. Installeer die niet zonder te vragen — de sjablonen in
+`assets/sjablonen/` zijn met de standaardbibliotheek gebouwd (een `.dotx` en
+een `.potx` zijn zip-archieven met OOXML), en Word en PowerPoint staan op deze
+machine, zodat een gebouwd bestand via COM-automatisering echt geopend en
+nagemeten kan worden.
 
 **Cache-valkuil bij testen.** De browser houdt `style.css` en `script.js`
 hardnekkig vast. Meet je in een iframe, vervang dan eerst de stylesheet door een
