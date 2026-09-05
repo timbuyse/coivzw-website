@@ -82,7 +82,10 @@ table{width:100%;border-collapse:collapse;font-size:.9375rem;margin:18px 0}
 .handtekening td{padding:0;border:0}
 th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--lijn);vertical-align:top}
 th{font-weight:600;font-size:.8125rem;letter-spacing:.05em;text-transform:uppercase;color:var(--zacht)}
-td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Een kolom met enkel getallen lijnt rechts uit — de enige uitzondering op
+   «alles lijnt links uit». Zo staan de eenheden onder elkaar en zijn bedragen
+   te vergelijken. Zie het hoofdstuk Documentsoorten. */
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .scroll{overflow-x:auto}
 
 .tweeluik{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px;margin:22px 0}
@@ -321,7 +324,7 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
 
   <div class="tweeluik">
     <div class="regel"><h4>Alles lijnt links uit</h4>
-      <p>Merkteken, koppen, lopende tekst en rasters beginnen op dezelfde rand. Ook sectietitels en de voettekst. Gecentreerde tekst leest trager en zweeft boven een raster dat links begint.</p></div>
+      <p>Merkteken, koppen, lopende tekst en rasters beginnen op dezelfde rand. Ook sectietitels en de voettekst. Gecentreerde tekst leest trager en zweeft boven een raster dat links begint. <strong>Eén uitzondering:</strong> een tabelkolom met enkel getallen lijnt rechts uit, zodat de eenheden onder elkaar staan.</p></div>
     <div class="regel"><h4>Regellengte blijft leesbaar</h4>
       <p>Op een scherm lopende tekst maximaal <span class="cijfer">68</span> tekens breed. Die begrenzing hoort op de tekst, niet op de container — anders schuift het hele blok naar het midden. <strong>Op papier geldt ze niet:</strong> daar bepalen de marges de regel en loopt de tekst van marge tot marge.</p></div>
     <div class="regel"><h4>Hover belooft een klik</h4>
@@ -471,7 +474,11 @@ footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--lijn);
 
   <p class="klein"><strong>Terracotta komt in een document terug als lijn, niet als tekst.</strong> Een kop is inkt, nooit terracotta. De kleur doet twee dingen: een streep van <span class="cijfer">1</span> pt onder de kopregel van een tabel, en een streep van <span class="cijfer">1,5</span> pt links van een blok dat eruit moet springen — een conclusie, een beslissing, een voorstel. Dat is hetzelfde middel als de terracotta lijn boven een regelblok op de site.</p>
 
-  <p class="klein"><strong>Tabellen.</strong> De kopregel is gevuld met zand, in kapitalen van <span class="cijfer">8</span> pt in de zachte tint, met die terracotta streep eronder. Tussen de rijen een haarlijn van <span class="cijfer">0,5</span> pt in de lijnkleur. <strong>Geen verticale lijnen</strong> — die knippen een tabel in hokjes. De eerste kolom begint op de tekstmarge, zodat de tabel links uitlijnt met de rest. Getallen staan in Instrument Serif, zoals overal.</p>
+  <p class="klein"><strong>Tabellen.</strong> De kopregel is gevuld met zand, in kapitalen van <span class="cijfer">8</span> pt in de zachte tint, met die terracotta streep eronder. Tussen de rijen een haarlijn van <span class="cijfer">0,5</span> pt in de lijnkleur. <strong>Geen verticale lijnen</strong> — die knippen een tabel in hokjes. De eerste kolom begint op de tekstmarge. Getallen staan in Instrument Serif, zoals overal.</p>
+
+  <p class="klein"><strong>Een kolom met enkel getallen lijnt rechts uit.</strong> Dat is de enige uitzondering op «alles lijnt links uit», en ze bestaat omdat cijfers vergeleken worden en tekst gelezen: rechts uitgelijnd staan de eenheden, tientallen en honderdtallen onder elkaar, en zie je in één oogopslag welk bedrag het grootste is. Een kolom met tekst, of met tekst én cijfers door elkaar, blijft links. Het opschrift volgt zijn eigen kolom — een kopregel links boven rechts uitgelijnde cijfers hoort nergens bij.</p>
+
+  <p class="klein"><strong>Een bron of een noot sluit aan tegen de tabel</strong>, op <span class="cijfer">9</span> pt in de zachte tint: <span class="cijfer">1,5</span> mm eronder, niet een volle witregel. Ze hoort bij die tabel, en een ruime tussenruimte maakt er een losse alinea van die net zo goed bij de volgende paragraaf zou kunnen horen.</p>
 
   <p class="klein"><strong>Installeer eerst de lettertypes.</strong> Instrument Sans en Instrument Serif zijn gratis en staan onder de SIL Open Font License. Een Word- of PowerPoint-bestand kan geen terugvalreeks meegeven zoals een webpagina: per stijl staat er één naam, en vindt Office die niet, dan vervangt het er stil een andere voor. Zonder die installatie ogen de sjablonen dus verkeerd zonder dat iemand ziet waarom.</p>
 
