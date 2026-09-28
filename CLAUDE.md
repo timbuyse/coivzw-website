@@ -5,7 +5,9 @@ Aanwijzingen voor Claude Code bij het werken in deze repository.
 ## Wat dit is
 
 De website van **COI vzw** (Centrum voor Ondersteuning van digitale Innovatie),
-een Vlaamse vereniging zonder winstoogmerk. Live op **https://www.coivzw.be**.
+een Vlaamse vereniging zonder winstoogmerk. Live op **https://www.coi.be**; het
+oudere domein coivzw.be verwijst daarnaar door. De DNS van coi.be staat bij
+Combell en draagt ook de e-mail (Microsoft 365) — raak die records niet aan.
 
 Antwoord altijd in het **Nederlands**, ongeacht de taal van instructies of
 tool-uitvoer.

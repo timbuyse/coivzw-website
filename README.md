@@ -51,17 +51,22 @@ en surf naar `http://localhost:5500`.
 4. Kies branch `main` en map `/ (root)`.
 5. Na enkele minuten is de site live op `https://<gebruikersnaam>.github.io/<repo-naam>/`.
 
-## Eigen domein koppelen (bv. coivzw.be)
+## Eigen domein koppelen (coi.be)
 
-1. Voeg een bestand `CNAME` toe aan de root van deze repo met als inhoud:
+De site draait op **www.coi.be**. Het oudere domein coivzw.be verwijst daar
+met een 301 naar door; die doorverwijzing staat bij de registrar, niet hier.
+
+1. Het bestand `CNAME` in de root van deze repo bevat:
    ```
-   coivzw.be
+   www.coi.be
    ```
-2. Stel bij je domeinregistrar de volgende DNS-records in:
-   - **A-records** voor `coivzw.be` naar de GitHub Pages IP-adressen:
+2. De DNS van coi.be staat bij Combell, met deze records:
+   - **A-records** voor `coi.be` naar de GitHub Pages IP-adressen:
      - 185.199.108.153
      - 185.199.109.153
      - 185.199.110.153
      - 185.199.111.153
-   - **CNAME** voor `www.coivzw.be` naar `<gebruikersnaam>.github.io`
+   - **CNAME** voor `www.coi.be` naar `timbuyse.github.io`
+   - Laat de records voor Microsoft 365 (MX, SPF, autodiscover) ongemoeid: de
+     e-mail op @coi.be hangt ervan af.
 3. Vink in **Settings > Pages** "Enforce HTTPS" aan zodra het certificaat beschikbaar is.

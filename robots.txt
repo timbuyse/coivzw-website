@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.coivzw.be/sitemap.xml
+Sitemap: https://www.coi.be/sitemap.xml
