@@ -6,6 +6,17 @@
 <title>COI vzw - Centrum voor Ondersteuning van digitale Innovatie</title>
 <meta name="description" content="COI vzw is een Vlaamse denkgroep die innovatieve, maatschappelijk relevante initiatieven in de informatiemaatschappij financieel ondersteunt. Opgericht in 1976, zetel in Leuven." />
 <link rel="canonical" href="https://www.coi.be/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="COI vzw" />
+<meta property="og:locale" content="nl_BE" />
+<meta property="og:title" content="COI vzw - Centrum voor Ondersteuning van digitale Innovatie" />
+<meta property="og:description" content="COI vzw is een Vlaamse denkgroep die innovatieve, maatschappelijk relevante initiatieven in de informatiemaatschappij financieel ondersteunt. Opgericht in 1976, zetel in Leuven." />
+<meta property="og:url" content="https://www.coi.be/" />
+<meta property="og:image" content="https://www.coi.be/assets/deelbeeld.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="627" />
+<meta property="og:image:alt" content="COI vzw: wij steunen digitale innovatie die een maatschappelijk vraagstuk aanpakt" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
@@ -29,7 +40,8 @@
     "addressLocality": "Leuven",
     "addressCountry": "BE"
   },
-  "email": "hedwig.vergeylen@coi.be"
+  "email": "hedwig.vergeylen@coi.be",
+  "sameAs": ["https://www.linkedin.com/company/coivzw"]
 }
 </script>
 </head>
@@ -77,25 +89,9 @@
         <p>COI functioneert als denkgroep en verleent financiële steun aan initiatieven die zowel innovatief als maatschappelijk relevant zijn voor de uitbouw van de informatiemaatschappij. De vereniging keert geen winst uit: middelen die uit participaties terugvloeien, worden opnieuw ingezet voor initiatieven die aan de doelstellingen van de vzw beantwoorden.</p>
         <p><a href="over-ons/">Lees meer over onze werking en doelstellingen &rarr;</a></p>
       </div>
-
-      <div class="identity">
-        <h3>Juridische gegevens</h3>
-        <dl>
-          <dt>Volledige naam</dt>
-          <dd>COI - Centrum voor Ondersteuning van digitale Innovatie vzw</dd>
-          <dt>Rechtsvorm</dt>
-          <dd>Vereniging zonder winstoogmerk (vzw) naar Belgisch recht</dd>
-          <dt>Ondernemingsnummer</dt>
-          <dd>0416.237.094</dd>
-          <dt>Rechtspersonenregister</dt>
-          <dd>RPR Leuven</dd>
-          <dt>Opgericht</dt>
-          <dd>29 maart 1976</dd>
-          <dt>Maatschappelijke zetel</dt>
-          <dd>Interleuvenlaan 16A, 3001 Leuven, België</dd>
-        </dl>
-        <p style="margin-top:14px;font-size:0.9rem;"><a href="documenten/">Statuten, jaarrekeningen en jaarverslagen &rarr;</a></p>
-      </div>
+      <!-- Het kader met juridische gegevens stond hier ook. Weggehaald: de
+           voettekst van elke pagina draagt naam, ondernemingsnummer, RPR en
+           adres al, en het volledige kader staat op over-ons/. -->
     </div>
   </section>
 
@@ -144,6 +140,47 @@
     </div>
   </section>
 
+  <!-- De drie meest recente initiatieven, zodat de startpagina iets concreets
+       toont. Komt er op de projectenpagina een nieuw initiatief bovenaan, schuif
+       het dan hier ook in en laat het oudste vallen. Elke kaart linkt naar het
+       anker van dat initiatief op de projectenpagina. -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Recent ondersteund</h2>
+      <div class="recent">
+
+        <a class="recent-kaart" href="projecten/#syndicate-one">
+          <span class="recent-kaart__logo recent-kaart__logo--wide"><img src="assets/syndicate-one-logo.svg" alt="" loading="lazy"></span>
+          <span class="recent-kaart__body">
+            <span class="recent-kaart__jaar">2026</span>
+            <span class="recent-kaart__naam">Syndicate One</span>
+            <span class="recent-kaart__tekst">Beginnende techondernemers krijgen naast kapitaal ook toegang tot meer dan honderd ondernemers die de weg al aflegden.</span>
+          </span>
+        </a>
+
+        <a class="recent-kaart" href="projecten/#volta-ventures-seed-fund">
+          <span class="recent-kaart__logo"><img src="assets/volta-ventures-logo.svg" alt="" loading="lazy"></span>
+          <span class="recent-kaart__body">
+            <span class="recent-kaart__jaar">2025</span>
+            <span class="recent-kaart__naam">Volta Ventures Seed Fund</span>
+            <span class="recent-kaart__tekst">Geld voor jonge softwarebedrijven nog vóór er een product of klant is, precies waar de meeste financiers afhaken.</span>
+          </span>
+        </a>
+
+        <a class="recent-kaart" href="projecten/#capricorn-healthtech-fund-ii">
+          <span class="recent-kaart__logo"><img src="assets/capricorn-logo.svg" alt="" loading="lazy"></span>
+          <span class="recent-kaart__body">
+            <span class="recent-kaart__jaar">2025</span>
+            <span class="recent-kaart__naam">Capricorn Healthtech Fund II</span>
+            <span class="recent-kaart__tekst">Zorgtechnologie die de lange weg van laboratorium tot patiënt ook effectief aflegt.</span>
+          </span>
+        </a>
+
+      </div>
+      <p class="recent__alle"><a href="projecten/">Alle elf initiatieven sinds 2013 &rarr;</a></p>
+    </div>
+  </section>
+
   <section class="section oproep">
     <div class="container oproep__inner">
       <div class="oproep__tekst">
@@ -166,7 +203,8 @@
     <p class="footer__links">
       <a href="documenten/">Documenten</a> &middot;
       <a href="privacy/">Privacybeleid</a> &middot;
-      <a href="cookies/">Cookiebeleid</a>
+      <a href="cookies/">Cookiebeleid</a> &middot;
+      <a href="https://www.linkedin.com/company/coivzw" rel="noopener">LinkedIn</a>
     </p>
     <p class="footer__copy">&copy; <span id="year"></span> COI vzw. Alle rechten voorbehouden.</p>
   </div>

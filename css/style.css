@@ -83,7 +83,7 @@
   --font-kop-klein: var(--font-body);
   --max-width: 1140px;
 
-  /* EÃƒÆ’Ã‚Â©n gedeelde versnellingscurve en duur voor alle overgangen. Zo bewegen
+  /* Eén gedeelde versnellingscurve en duur voor alle overgangen. Zo bewegen
      knoppen, kaarten, navigatie en de scroll-animaties op dezelfde manier. */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --snel: 0.2s;
@@ -753,6 +753,8 @@ a {
 
   .btn:hover,
   .card:hover,
+  .recent-kaart:hover,
+  .recent-kaart:focus-visible,
   .project-card:hover {
     transform: none;
   }
@@ -900,6 +902,103 @@ a {
   font-size: var(--t-2);
 }
 
+/* Recent ondersteund (startpagina). De hele kaart is een link naar dat
+   initiatief op de projectenpagina, dus hier mag de hover van .card wel: de
+   belofte van klikbaarheid klopt. Logokader zoals op de projectenpagina, maar
+   lager, want er staat maar één zin onder. */
+.recent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.recent-kaart {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  overflow: hidden;
+  color: var(--color-text);
+  box-shadow: 0 2px 10px rgba(29, 27, 26, 0.04);
+  transition: transform var(--snel) var(--ease),
+              box-shadow var(--snel) var(--ease),
+              border-color var(--snel) var(--ease);
+}
+
+.recent-kaart:hover,
+.recent-kaart:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--color-line-diep);
+  box-shadow: 0 14px 30px rgba(29, 27, 26, 0.10);
+}
+
+.recent-kaart:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.recent-kaart__logo {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-alt);
+  padding: 22px 28px;
+}
+
+.recent-kaart__logo img {
+  max-width: 100%;
+  max-height: 64px;
+  object-fit: contain;
+}
+
+/* Zelfde reden als .project-card__logo--wide: een laag woordmerk mag de
+   breedte nemen in plaats van als streepje in het midden te hangen. */
+.recent-kaart__logo--wide img {
+  width: 100%;
+  height: auto;
+}
+
+.recent-kaart__body {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 24px 24px;
+}
+
+/* Jaartal in de serif, zoals overal waar een cijfer staat. */
+.recent-kaart__jaar {
+  font-family: var(--font-heading);
+  font-size: var(--t-4);
+  line-height: 1;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.recent-kaart__naam {
+  font-weight: 600;
+  font-size: var(--t-4);
+  line-height: 1.3;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.recent-kaart__tekst {
+  font-size: var(--t-2);
+}
+
+.recent__alle {
+  margin-top: 28px;
+  font-weight: 600;
+  font-size: var(--t-2);
+}
+
+/* Wie via de startpagina naar een initiatief springt, landt anders onder de
+   vaste kopbalk van 80px. */
+.project-card {
+  scroll-margin-top: 104px;
+}
+
 /* Identiteitskader (rechtsvorm, ondernemingsnummer, zetel) */
 .identity {
   max-width: 760px;
@@ -991,6 +1090,27 @@ a {
 .prose th {
   background: var(--color-bg-alt);
   font-weight: 600;
+  color: var(--color-dark);
+}
+
+/* Kader voor één zin die niet mag wegvallen tussen de rest, zoals "voldoen is
+   geen recht op steun". Zelfde taal als het identiteitskader - streep in de
+   accentkleur links - maar zonder auto-marges, zodat het met de tekst links
+   uitlijnt. */
+.kader {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
+  padding: 18px 24px;
+  margin: 24px 0 8px;
+}
+
+.prose .kader p {
+  margin-bottom: 0;
+}
+
+.kader strong {
   color: var(--color-dark);
 }
 
@@ -1095,6 +1215,31 @@ a {
 .domein p {
   font-size: var(--t-2);
   color: var(--color-text);
+}
+
+/* Lijntekening per domein. Zelfde taal als het merkteken: één lijndikte met
+   afgeronde uiteinden, in inkt, en telkens één element in de accentkleur - een
+   lijn zoals de stam van de i, of een gevulde punt zoals die erboven. Inline
+   SVG in plaats van een bestand, zodat de kleuren uit :root komen. */
+.domein__icoon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  fill: none;
+  stroke: var(--color-dark);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.domein__icoon .accent {
+  stroke: var(--color-primary);
+}
+
+.domein__icoon .punt {
+  fill: var(--color-primary);
+  stroke: none;
 }
 
 /* Documentenlijst */

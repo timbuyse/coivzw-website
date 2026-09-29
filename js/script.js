@@ -41,7 +41,7 @@ if (yearEl) {
   var selectie = [
     '.section__title', '.section__intro',
     '.prose', '.identity', '.about',
-    '.cards > .card',
+    '.cards > .card', '.recent > .recent-kaart',
     '.voorwaarden > .voorwaarde', '.steunvormen > .steunvorm',
     '.projects-grid > .jaar-kop',
     '.projects-grid > .project-card',
@@ -86,7 +86,17 @@ if (yearEl) {
     }
   });
 
+  // Na het binnenkomen gaan de hulpklassen weer weg. Zolang .reveal.is-visible
+  // op een element staat, wint die regel (drie klassen) van bv. .card:hover
+  // (twee): transform bleef dan op none en de eigen overgang van de schaduw
+  // werd overschreven, zodat kaarten bij hover niet meer optilden.
   function toon(el) {
+    el.addEventListener('transitionend', function klaar(e) {
+      if (e.target !== el || e.propertyName !== 'opacity') return;
+      el.removeEventListener('transitionend', klaar);
+      el.classList.remove('reveal', 'is-visible');
+      el.style.removeProperty('--reveal-vertraging');
+    });
     el.classList.add('is-visible');
   }
 
