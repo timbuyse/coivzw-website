@@ -141,6 +141,6 @@ if (contactForm) {
     const message = document.getElementById('message').value;
     const subject = encodeURIComponent(`Contact via website - ${name}`);
     const body = encodeURIComponent(`${message}\n\nVan: ${name} (${email})`);
-    window.location.href = `mailto:hedwig.vergeylen@coi.be?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@coi.be?subject=${subject}&body=${body}`;
   });
 }
